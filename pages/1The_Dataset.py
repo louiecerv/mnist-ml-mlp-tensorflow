@@ -115,7 +115,7 @@ def app():
     st.session_state.clf = clf
 
     if st.button("Show Graphs"):
-   
+        st.write("TO DO: insert some data plot here")
 
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
