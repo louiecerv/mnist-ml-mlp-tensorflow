@@ -20,6 +20,7 @@ def app():
     presence of heart disease in the patient. It is integer valued 0 = no 
     disease and 1 = disease.
     \nAttribute Information:
+    
     age
     sex
     chest pain type (4 values)
