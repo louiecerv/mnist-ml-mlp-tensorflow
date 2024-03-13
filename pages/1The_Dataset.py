@@ -5,7 +5,7 @@ import streamlit as st
 import altair as alt
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.neural_network import MLPRegressor
+from sklearn.neural_network import MLPClassifier
 from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
 import time
@@ -13,27 +13,45 @@ import time
 # Define the Streamlit app
 def app():
 
-    text = """The California housing dataset is a popular benchmark dataset frequently 
-    used in the field of regression analysis for real estate price prediction. 
-    It contains information about various features that potentially influence 
-    housing prices in California.
-    Data Description:
-    \nSource: Publicly available from https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html
-    Size: Contains 20,640 data points, each representing a block in California."""
+    text = """This data set dates from 1988 and consists of four databases: 
+    Cleveland, Hungary, Switzerland, and Long Beach V. It contains 76 attributes, 
+    including the predicted attribute, but all published experiments 
+    refer to using a subset of 14 of them. The "target" field refers to the 
+    presence of heart disease in the patient. It is integer valued 0 = no 
+    disease and 1 = disease.
+    
+    Attribute Information:
+    age
+    sex
+    chest pain type (4 values)
+    resting blood pressure
+    serum cholestoral in mg/dl
+    fasting blood sugar > 120 mg/dl
+    resting electrocardiographic results (values 0,1,2)
+    maximum heart rate achieved
+    exercise induced angina
+    oldpeak = ST depression induced by exercise relative to rest
+    the slope of the peak exercise ST segment
+    number of major vessels (0-3) colored by flourosopy
+    thal: 0 = normal; 1 = fixed defect; 2 = reversable defect
+    """
     st.write(text)
-    # Load the California housing data
-    data = fetch_california_housing()
+    # Load the data dataset
+    df = pd.read_csv('heart.csv', header=0)
 
-    # Convert data features to a DataFrame
-    feature_names = data.feature_names
-    
-    df = pd.DataFrame(data.data, columns=feature_names)
-    df['target'] = data.target
-    
-    st.subheader('The California Housing Dataset')
+    st.write('Browse the Dataset')
     st.write(df)
 
-    st.write('Data Description')
+     # Get column names and unique values
+    columns = df.columns
+    unique_values = {col: df[col].unique() for col in columns}    
+    
+    # Display unique values for each column
+    st.write("\n**Unique Values:**")
+    for col, values in unique_values.items():
+        st.write(f"- {col}: {', '.join(map(str, values))}")
+
+    st.write('Descriptive Statistics')
     st.write(df.describe().T)
 
     # Separate features and target variable
@@ -89,54 +107,15 @@ def app():
     )
 
     # Define the MLP regressor model
-    clf = MLPRegressor(solver=solver, 
-                        hidden_layer_sizes=(hidden_layers),  
-                        activation=activation, 
-                        max_iter=max_iter, random_state=42)
+    clf = MLPClassifier(hidden_layer_sizes=(hidden_layers,), 
+            solver=solver, activation=activation, 
+            max_iter=max_iter, random_state=42)
 
     #store the clf object for later use
     st.session_state.clf = clf
 
     if st.button("Show Graphs"):
-        plot_feature(df["MedInc"], df["target"], 
-                     "Median Income (Thousands USD)", 
-                     "Median House Value (Thousands USD", 
-                     "Median Income vs. Median House Value")
-    
-        plot_feature(df["HouseAge"], df["target"], 
-                     "House Age in years", 
-                     "Median House Value (Thousands USD", 
-                     "House Age vs. Median House Value")
-        
-        plot_feature(df["AveRooms"], df["target"], 
-                     "Average Rooms", 
-                     "Median House Value (Thousands USD", 
-                     "Average vs. Median House Value")
-            
-        plot_feature(df["AveBedrms"], df["target"], 
-                     "Average Bed Rooms", 
-                     "Median House Value (Thousands USD", 
-                     "Average Bed Rooms vs. Median House Value")
-        
-        plot_feature(df["Population"], df["target"], 
-                     "Population", 
-                     "Median House Value (Thousands USD", 
-                     "Population vs. Median House Value")
-        
-        plot_feature(df["AveOccup"], df["target"], 
-                     "Average Occupancy", 
-                     "Median House Value (Thousands USD", 
-                     "Average Occupancy vs. Median House Value")
-        
-        plot_feature(df["Latitude"], df["target"], 
-                     "Latitude", 
-                     "Median House Value (Thousands USD", 
-                     "Latitude vs. Median House Value")
-    
-        plot_feature(df["Longitude"], df["target"], 
-                     "Longitude", 
-                     "Median House Value (Thousands USD", 
-                     "Longitude vs. Median House Value")
+   
 
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
@@ -154,19 +133,6 @@ def app():
         st.success("Regressor training completed!") 
         st.write("Use the sidebar to open the Performance page.")
         
-def plot_feature(feature, target, labelx, labely, title):
-    # Display the plots
-    fig, ax = plt.subplots(figsize=(10, 6))
-    # Scatter plot
-    ax.scatter(feature, target)
-    # Add labels and title
-    ax.set_xlabel(labelx)
-    ax.set_ylabel(labely)
-    ax.set_title(title)
-    # Add grid
-    ax.grid(True)
-    st.pyplot(fig)
-
 def train_model(X_train_scaled, y_train):
     clf = st.session_state.clf 
     clf.fit(X_train_scaled, y_train)
