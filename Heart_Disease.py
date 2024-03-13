@@ -54,26 +54,15 @@ def app():
     st.image('california.jpg', caption="California Housing Dataset")
 
     text = """
-    This app leverages a machine learning model to predict housing prices 
-    based on various factors influencing the California housing market.
-    Predict house prices using a trained MLP model. Explore the 
-    influence of different features on the predicted price.
-    Source: Derived from the 1990 U.S. Census data for California [1].
-    Size: Contains 20,640 data points, each representing a census block group.
-    Features:
-    8 independent variables:
-    MedInc: Median income in the block group.
-    HouseAge: Median age of houses in the block group.
-    AveRooms: Average number of rooms per household.
-    AveBedrms: Average number of bedrooms per household.
-    Population: Population of the block group.
-    AveOccup: Average number of household members.
-    Latitude: Geographical latitude of the block group centroid.
-    Longitude: Geographical longitude of the block group centroid.
-    Target variable:
-    Median house value in dollars (scaled by dividing by 100,000).
+    This Streamlit app leverages an MLP classifier to predict the presence or absence of heart disease based on your 
+    input of various heart symptoms. The data used to train the model comes from the heart disease dataset 
+    [Kaggle Heart Disease Dataset].
+    \nAnalyze your risk!
+    Provide information on factors like chest pain, blood pressure, and cholesterol, 
+    and this app will estimate your likelihood of having heart disease.
+    \nDisclaimer: This app is for informational purposes only and should not be used for definitive medical diagnosis. 
+    Please consult a healthcare professional for any concerns about your heart health.
     """
-
     st.text(text)
 
     text = """Scikit-learn's MLPRegressor is a tool for building multi-layer 
