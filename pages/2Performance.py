@@ -9,9 +9,9 @@ import time
 
 # Define the Streamlit app
 def app():
-    st.subheader('Performance of the MLP-ANN Regressor on the California Housing Dataset')
-    text = """Test the performance of the MLP Regressor using the 20% of the dataset that was
-    set aside for testing. The Mean Squared Error (MSE) and the R-squared value are the performance metrics."""
+    st.subheader('Performance of the MLP-ANN Classifier on the Heart Disease Dataset')
+    text = """We test the performance of the MLP Classifer using the 20% of the dataset that was
+    set aside for testing. The confusion matrix and classification report are presented below."""
     st.write(text)
     
     if st.button('Begin Test'):
@@ -21,35 +21,15 @@ def app():
         y_test_pred = st.session_state.clf.predict(X_test_scaled)
         y_test = st.session_state.y_test
 
-        # Evaluate performance using appropriate metrics (e.g., mean squared error, R-squared)
-        mse = mean_squared_error(y_test, y_test_pred)
-        r2 = r2_score(y_test, y_test_pred)
+        st.subheader('Confusion Matrix')
 
-        st.text("Mean squared error: " + f"{mse:,.2f}")
-        st.text("R-squared: " + f"{r2:,.2f}")
-
-        # Create a figure and an axes object
-        fig, ax = plt.subplots()
-
-        # Scatter plot using the axes object
-        ax.scatter(y_test, y_test_pred, s=5)
-
-        # Set labels and title using the axes object
-        ax.set_xlabel("Prices")
-        ax.set_ylabel("Predicted Prices")
-        ax.set_title("Real vs Predicted Housing Prices")
-
-        # Display the plot
-        st.pyplot(fig)
-
-        text = """An R-squared of 0.71 on the California housing dataset indicates that 71% of the variance 
-        in the median house prices can be explained by the features included in the model. In other words, 
-        the model captures a significant portion of the factors influencing housing prices in California.
-        The model can be used to predict median house prices based on the features it considers. However, 
-        it's important to understand the limitations of relying solely on R-squared:
-        Higher R-squared doesn't guarantee perfect predictions: A value of 0.71 signifies a good fit, 
-        but there's still 29% of the variance unexplained by the model. This means the model's predictions 
-        will not be completely accurate and will have some degree of error."""
+        st.write('Confusion Matrix')
+        cm = confusion_matrix(y_test, y_test_pred)
+        st.text(cm)
+        st.subheader('Performance Metrics')
+        st.text(classification_report(y_test, y_test_pred))
+  
+        text = """Interpret the result."""
 
         st.write(text)
 
