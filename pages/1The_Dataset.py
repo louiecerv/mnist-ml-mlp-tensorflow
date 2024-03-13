@@ -19,7 +19,6 @@ def app():
     refer to using a subset of 14 of them. The "target" field refers to the 
     presence of heart disease in the patient. It is integer valued 0 = no 
     disease and 1 = disease.
-    
     Attribute Information:
     age
     sex
