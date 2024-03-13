@@ -78,12 +78,11 @@ def app():
     \nMLP Architecture:
     The MLP is a type of artificial neural network with an interconnected layer structure.
     In this case, the input layer will have the size matching the number of features in the heart 
-    disease data (e.g., age, blood pressure).
-    
-    There will be one or more hidden layers containing a number of artificial neurons. 
-    These hidden layers extract complex patterns from the data.  The final output layer will have 
-    a single neuron with a sigmoid activation function. This neuron outputs a value between 0 and 1, 
-    which is interpreted as the probability of having heart disease (closer to 1) or not (closer to 0).
+    disease data (e.g., age, blood pressure). There will be one or more hidden layers containing 
+    a number of artificial neurons. These hidden layers extract complex patterns from the data.  
+    The final output layer will have a single neuron with a sigmoid activation function. 
+    This neuron outputs a value between 0 and 1, which is interpreted as the probability of 
+    having heart disease (closer to 1) or not (closer to 0).
 
     \nTraining:
     The MLP is trained using a labeled dataset where each data point has a confirmed classification 
