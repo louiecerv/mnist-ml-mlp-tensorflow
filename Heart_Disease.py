@@ -41,7 +41,7 @@ def app():
     if "n_clusters" not in st.session_state:
         st.session_state.n_clusters = 4
 
-    text = """Multi-Layer Perceptron Regressor on the California Housing Dataset"""
+    text = """Multi-Layer Perceptron Classifier on the Heart Disease Dataset"""
     st.subheader(text)
 
     text = """Louie F. Cervantes, M. Eng. (Information Engineering) \n
@@ -51,7 +51,7 @@ def app():
     West Visayas State University"""
     st.text(text)
 
-    st.image('california.jpg', caption="California Housing Dataset")
+    st.image('heart-disease.jpg', caption="Heart Disease Diagnosis using MLP-ANN")
 
     text = """
     This Streamlit app leverages an MLP classifier to predict the presence or absence of heart disease based on your 
@@ -65,17 +65,37 @@ def app():
     """
     st.text(text)
 
-    text = """Scikit-learn's MLPRegressor is a tool for building multi-layer 
-    perceptron (MLP) models for regression tasks. Unlike linear regression, 
-    MLPs can model non-linear relationships between features and the target variable.
+    text = """
+    An MLP (Multi-Layer Perceptron) classifier can be used to analyze a heart disease dataset and 
+    predict whether a patient has heart disease or not. Here's how it works in this context:
+    \nBinary Classification:
+    The MLP aims for binary classification, meaning the output will be either 0 (no heart disease) or 1 (heart disease).
+    \nData Preprocessing:
+    The heart disease dataset contain various features like age, blood pressure, cholesterol levels, etc. 
+    These features might need scaling or normalization for the MLP to process them efficiently.
     
-    \nFunction: Learns a non-linear mapping between input data and continuous target values.
-    Architecture: Includes an input layer, one or more hidden layers with non-linear 
-    activation functions, and an output layer.
-    \nTraining: Optimizes the squared error using learning algorithms like LBFGS 
-    or stochastic gradient descent.
-    Uses: Suitable for complex regression problems where linear models might not 
-    perform well."""
+    \nMLP Architecture:
+    The MLP is a type of artificial neural network with an interconnected layer structure.
+    In this case, the input layer will have the size matching the number of features in the heart 
+    disease data (e.g., age, blood pressure).
+    
+    There will be one or more hidden layers containing a number of artificial neurons. 
+    These hidden layers extract complex patterns from the data.  The final output layer will have 
+    a single neuron with a sigmoid activation function. This neuron outputs a value between 0 and 1, 
+    which is interpreted as the probability of having heart disease (closer to 1) or not (closer to 0).
+
+    \nTraining:
+    The MLP is trained using a labeled dataset where each data point has a confirmed classification 
+    (heart disease or no disease) associated with its features.
+    During training, the MLP adjusts the weights and biases between its artificial neurons to 
+    minimize the error between its predicted probabilities and the actual labels in the training data.
+    A common training algorithm for MLPs is backpropagation, which calculates the error and propagates 
+    it backward through the network to update the weights and biases.
+    \nPrediction:
+    Once trained, the MLP can predict the probability of heart disease for new, unseen data points 
+    based on their features. A threshold is typically set on the output probability (e.g., 0.5). 
+    Values above the threshold are classified as having heart disease, while those below are 
+    classified as healthy."""
 
     st.write(text)
 
