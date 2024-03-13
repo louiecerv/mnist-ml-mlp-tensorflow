@@ -54,16 +54,17 @@ def app():
     st.image('heart-disease.jpg', caption="Heart Disease Diagnosis using MLP-ANN")
 
     text = """
-    This Streamlit app leverages an MLP classifier to predict the presence or absence of heart disease based on your 
-    input of various heart symptoms. The data used to train the model comes from the heart disease dataset 
-    [Kaggle Heart Disease Dataset].
+    This Streamlit app leverages an MLP classifier to predict the presence or absence of 
+    heart disease based on your input of various heart symptoms. The data used to train 
+    the model comes from the heart disease dataset 
+    [https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset].
     \nAnalyze your risk!
     Provide information on factors like chest pain, blood pressure, and cholesterol, 
     and this app will estimate your likelihood of having heart disease.
     \nDisclaimer: This app is for informational purposes only and should not be used for definitive medical diagnosis. 
     Please consult a healthcare professional for any concerns about your heart health.
     """
-    st.text(text)
+    st.write(text)
 
     text = """
     An MLP (Multi-Layer Perceptron) classifier can be used to analyze a heart disease dataset and 
