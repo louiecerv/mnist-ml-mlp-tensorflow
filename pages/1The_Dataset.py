@@ -20,7 +20,7 @@ def app():
     presence of heart disease in the patient. It is integer valued 0 = no 
     disease and 1 = disease.
     \nAttribute Information:
-    
+
     age
     sex
     chest pain type (4 values)
@@ -75,6 +75,7 @@ def app():
 
     # save the scaler object for later use
     st.session_state["scaler"] = scaler
+
 
    # Define MLP parameters    
     st.sidebar.subheader('Set the MLP Parameters')
