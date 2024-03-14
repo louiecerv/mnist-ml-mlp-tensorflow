@@ -128,7 +128,7 @@ def app():
         plot_feature(df["trestbps"], df["chol"], 'trestbps', 'chol', 'trestbps VS chol')
         plot_feature(df["thalach"], df["chol"], 'thalach', 'chol', 'thalach VS chol')
 
-    text = """Use the following parameters: solver=lbfgs, activation=relu, n_hidden_layer=150, max_iter=150"""
+    text = """Recommended ANN parameters: solver=lbfgs, activation=relu, n_hidden_layer=150, max_iter=150"""
     st.write(text)
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
