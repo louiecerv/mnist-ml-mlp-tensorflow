@@ -123,7 +123,7 @@ def app():
         countplot(df, "sex", "target", "Sex and Heart Disease")
         countplot(df, "age_group", "target", "Age Group and Heart Disease")
         countplot(df, "target", "fbs", "FBS>120 and Heart Disease")
-        
+        countplot(df, "target", "thal", "THAL and Heart Disease")
 
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
