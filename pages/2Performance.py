@@ -17,12 +17,22 @@ def app():
     st.write(text)
     
     if st.button('Begin Test'):
-        
+        progress_bar = st.progress(0, text="Performance test has started please wait...")
+
         X_test_scaled = st.session_state.X_test_scaled
         # Make predictions on the test set
         y_test_pred = st.session_state.clf.predict(X_test_scaled)
         y_test = st.session_state.y_test
 
+        # update the progress bar
+        for i in range(100):
+            # Update progress bar value
+            progress_bar.progress(i + 1)
+            # Simulate some time-consuming task (e.g., sleep)
+            time.sleep(0.01)
+        # Progress bar reaches 100% after the loop completes
+        st.success("Performance test completed!") 
+        
         st.subheader('Confusion Matrix')
 
         st.write('Confusion Matrix')
