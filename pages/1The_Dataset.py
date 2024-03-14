@@ -116,7 +116,11 @@ def app():
     st.session_state.clf = clf
 
     if st.button("Show Graphs"):
-        st.write("TO DO: insert some data plot here")
+        plot_feature(df["age"], df["target"], 
+                     "Age", 
+                     "Heart Disease", 
+                     "Age vs. Heart Disease")
+        
 
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
@@ -133,7 +137,20 @@ def app():
         # Progress bar reaches 100% after the loop completes
         st.success("Regressor training completed!") 
         st.write("Use the sidebar to open the Performance page.")
-        
+
+def plot_feature(feature, target, labelx, labely, title):
+    # Display the plots
+    fig, ax = plt.subplots(figsize=(10, 6))
+    # Scatter plot
+    ax.scatter(feature, target)
+    # Add labels and title
+    ax.set_xlabel(labelx)
+    ax.set_ylabel(labely)
+    ax.set_title(title)
+    # Add grid
+    ax.grid(True)
+    st.pyplot(fig)
+
 def train_model(X_train_scaled, y_train):
     clf = st.session_state.clf 
     clf.fit(X_train_scaled, y_train)
