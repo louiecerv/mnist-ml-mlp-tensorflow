@@ -125,6 +125,7 @@ def app():
         countplot(df, "target", "fbs", "FBS>120 and Heart Disease")
         countplot(df, "target", "thal", "THAL and Heart Disease")
         plot_feature(df["trestbps"], df["chol"], 'trestbps', 'chol', 'trestbps VS chol')
+        plot_feature(df["thalach"], df["chol"], 'thalach', 'chol', 'thalach VS chol')
 
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
