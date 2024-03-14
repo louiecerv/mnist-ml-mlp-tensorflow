@@ -90,6 +90,7 @@ def app():
         min_value=5,
         max_value=250,
         value=10,  # Initial value
+        step=5
     )
 
     alpha = st.sidebar.slider(   
@@ -127,7 +128,7 @@ def app():
         plot_feature(df["trestbps"], df["chol"], 'trestbps', 'chol', 'trestbps VS chol')
         plot_feature(df["thalach"], df["chol"], 'thalach', 'chol', 'thalach VS chol')
 
-    text = """Use the following parameters: solver=adam, activation=relu, n_hidden_layer=150"""
+    text = """Use the following parameters: solver=lbfgs, activation=relu, n_hidden_layer=150, max_iter=150"""
     st.write(text)
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
