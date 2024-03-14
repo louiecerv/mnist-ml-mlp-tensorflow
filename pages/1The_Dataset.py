@@ -116,13 +116,7 @@ def app():
     st.session_state.clf = clf
 
     if st.button("Show Graphs"):
-        plot_feature(df["age"], df["chol"], 
-                     "Age", 
-                     "Cholesterol", 
-                     "Age vs. Cholesterol")
-        
-        feature_by_feature(df["age"], df["target"], 
-                    'Age', 'target', 'Age Distributed by Label')
+        countplot(df, "age", "target", "Age Heart Disease")
         
 
     if st.button('Start Training'):
@@ -142,7 +136,15 @@ def app():
         st.write("Use the sidebar to open the Performance page.")
 
 
+def countplot(df, feature, grouping, title):
+    fig, ax = plt.subplots(figsize=(6, 3))
+    # Create the countplot with clear title and legend
+    p = sns.countplot(x=feature, data = df, hue=grouping,  palette='bright')
+    ax.set_title(title, fontsize=14)
 
+    # Display the plot
+    plt.tight_layout()  # Prevent overlapping elements
+    st.pyplot(fig)
 
 def train_model(X_train_scaled, y_train):
     clf = st.session_state.clf 
