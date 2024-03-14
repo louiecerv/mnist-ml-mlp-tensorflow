@@ -120,6 +120,7 @@ def app():
         labels = ['10-29', '30-49', '50-69', '70-89']
         df['age_group'] = pd.cut(df['age'], bins, labels=labels)
         countplot(df, "age_group", "sex", "Age and Sex")
+        countplot(df, "sex", "target", "Sex and Heart Disease")
         
 
     if st.button('Start Training'):
