@@ -116,7 +116,10 @@ def app():
     st.session_state.clf = clf
 
     if st.button("Show Graphs"):
-        countplot(df, "chol", "age", "Heart Disease and Age")
+        bins = [10, 30, 50, 70, 90]
+        labels = ['10-29', '30-49', '50-69', '70-89']
+        df['age_group'] = pd.cut(df['age'], bins, labels=labels)
+        countplot(df, "age_group", "sex", "Age and Sex")
         
 
     if st.button('Start Training'):
