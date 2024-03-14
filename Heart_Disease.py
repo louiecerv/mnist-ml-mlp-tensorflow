@@ -58,10 +58,10 @@ def app():
     heart disease based on your input of various heart symptoms. The data used to train 
     the model comes from the heart disease dataset 
     [https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset].
-    \nAnalyze your risk!
-    Provide information on factors like chest pain, blood pressure, and cholesterol, 
+    \nProvide information on factors like chest pain, blood pressure, and cholesterol, 
     and this app will estimate your likelihood of having heart disease.
-    \nDisclaimer: This app is for informational purposes only and should not be used for definitive medical diagnosis. 
+    \nDisclaimer: This app is for informational purposes only and should not be 
+    used for definitive medical diagnosis. 
     Please consult a healthcare professional for any concerns about your heart health.
     """
     st.write(text)
