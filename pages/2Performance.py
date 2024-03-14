@@ -32,8 +32,8 @@ def app():
         classifier on a heart disease prediction task, classifying individuals as either 
         having or not having heart disease. Let's break down the results and their 
         implications for future unseen data:
-        Cells (These numbers were produced by a run using certain parameters of the MLP.  
-        Other combinations of parameters could produce different values.):
+        Cells (These numbers were produced by a run using certain parameters of the MLP.  Other 
+        combinations of parameters could produce different values.):
         [79, 23]: This cell represents individuals correctly classified as healthy 
         (negative). There were 79 true negatives (TN).
         [11, 92]: This cell represents individuals with heart disease. The model 
