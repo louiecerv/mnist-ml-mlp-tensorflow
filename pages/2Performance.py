@@ -83,15 +83,13 @@ def app():
         dataset it was trained on. If the dataset doesn't represent the real-world distribution of 
         heart disease cases well, the 83% accuracy might not be reliable for real-world application.
         Therefore, based solely on the 83% accuracy, it's not possible to reliably predict unseen 
-        heart disease data. Here's what you can do for a more reliable assessment:
-        Test on unseen data: Split the data into training and testing sets. Train the model on the 
-        training set and evaluate its performance on the unseen testing set. This will give a better 
-        idea of how well it generalizes.
-        Look at other metrics: Accuracy is just one measure of performance. Consider metrics 
-        like precision, recall, and F1 score to understand how well the model performs on different
+        heart disease data. 
+        \nAccuracy is just one measure of performance. Consider metrics like precision, 
+        recall, and F1 score to understand how well the model performs on different
         types of classification errors (false positives and false negatives).
-        Domain knowledge: In the medical field, even a small misclassification can have serious 
-        consequences. Consult medical experts to understand the acceptable level of error 
+        Domain knowledge: In the medical field, even a small misclassification 
+        can have serious consequences. 
+        \nConsult medical experts to understand the acceptable level of error 
         for this application."""
 
         st.write(text)
