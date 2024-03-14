@@ -121,8 +121,8 @@ def app():
                      "Cholesterol", 
                      "Age vs. Cholesterol")
         
-        feature_by_feature(df["age"], df["gender"], 
-                    'Age', 'Gender', 'Age Distributed by Gender')
+        feature_by_feature(df["age"], df["target"], 
+                    'Age', 'target', 'Age Distributed by Label')
         
 
     if st.button('Start Training'):
