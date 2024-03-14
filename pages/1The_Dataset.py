@@ -116,7 +116,7 @@ def app():
     st.session_state.clf = clf
 
     if st.button("Show Graphs"):
-        countplot(df, "age", "target", "Age Heart Disease")
+        countplot(df, "target", "age", "Age Heart Disease")
         
 
     if st.button('Start Training'):
