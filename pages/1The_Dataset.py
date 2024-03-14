@@ -124,6 +124,7 @@ def app():
         countplot(df, "age_group", "target", "Age Group and Heart Disease")
         countplot(df, "target", "fbs", "FBS>120 and Heart Disease")
         countplot(df, "target", "thal", "THAL and Heart Disease")
+        plot_feature(trestbps, chol, 'trestbps', 'chol', 'trestbps VS chol')
 
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
@@ -150,6 +151,20 @@ def countplot(df, feature, grouping, title):
 
     # Display the plot
     plt.tight_layout()  # Prevent overlapping elements
+    st.pyplot(fig)
+
+
+def plot_feature(feature, target, labelx, labely, title):
+    # Display the plots
+    fig, ax = plt.subplots(figsize=(10, 6))
+    # Scatter plot
+    ax.scatter(feature, target)
+    # Add labels and title
+    ax.set_xlabel(labelx)
+    ax.set_ylabel(labely)
+    ax.set_title(title)
+    # Add grid
+    ax.grid(True)
     st.pyplot(fig)
 
 def train_model(X_train_scaled, y_train):
