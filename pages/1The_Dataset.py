@@ -121,6 +121,9 @@ def app():
                      "Cholesterol", 
                      "Age vs. Cholesterol")
         
+        feature_by_feature(df["age"], df["gender"], 
+                    'Age', 'Gender', 'Age Distributed by Gender')
+        
 
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
@@ -150,6 +153,31 @@ def plot_feature(feature, target, labelx, labely, title):
     # Add grid
     ax.grid(True)
     st.pyplot(fig)
+
+def feature_by_feature(feature, grouping, labelx, labely, title):
+    # Create figure and axis objects
+    fig, ax = plt.subplots()
+
+    # Get frequency counts for age grouped by gender
+    age_counts = df.groupby(grouping)[feature].value_counts().unstack(fill_value=0)
+
+    # Plot bars for each gender
+    age_counts.plot(kind='bar', ax=ax)
+
+    # Set labels and title
+    ax.set_xlabel(labelx)
+    ax.set_ylabel(labely)
+    ax.set_title(title)
+
+    # Add legend for genders
+    ax.legend(title=grouping)
+
+    # Rotate x-axis labels for better readability if many categories
+    plt.xticks(rotation=45)
+
+    # Show the plot
+    st.pyplot(fig)   
+
 
 def train_model(X_train_scaled, y_train):
     clf = st.session_state.clf 
