@@ -141,42 +141,7 @@ def app():
         st.success("Regressor training completed!") 
         st.write("Use the sidebar to open the Performance page.")
 
-def plot_feature(feature, target, labelx, labely, title):
-    # Display the plots
-    fig, ax = plt.subplots(figsize=(10, 6))
-    # Scatter plot
-    ax.scatter(feature, target)
-    # Add labels and title
-    ax.set_xlabel(labelx)
-    ax.set_ylabel(labely)
-    ax.set_title(title)
-    # Add grid
-    ax.grid(True)
-    st.pyplot(fig)
 
-def feature_by_feature(feature, grouping, labelx, labely, title):
-    # Create figure and axis objects
-    fig, ax = plt.subplots()
-
-    # Get frequency counts for age grouped by gender
-    age_counts = df.groupby(grouping)[feature].value_counts().unstack(fill_value=0)
-
-    # Plot bars for each gender
-    age_counts.plot(kind='bar', ax=ax)
-
-    # Set labels and title
-    ax.set_xlabel(labelx)
-    ax.set_ylabel(labely)
-    ax.set_title(title)
-
-    # Add legend for genders
-    ax.legend(title=grouping)
-
-    # Rotate x-axis labels for better readability if many categories
-    plt.xticks(rotation=45)
-
-    # Show the plot
-    st.pyplot(fig)   
 
 
 def train_model(X_train_scaled, y_train):
