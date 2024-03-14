@@ -116,10 +116,10 @@ def app():
     st.session_state.clf = clf
 
     if st.button("Show Graphs"):
-        plot_feature(df["age"], df["target"], 
+        plot_feature(df["age"], df["chol"], 
                      "Age", 
-                     "Heart Disease", 
-                     "Age vs. Heart Disease")
+                     "Cholesterol", 
+                     "Age vs. Cholesterol")
         
 
     if st.button('Start Training'):
