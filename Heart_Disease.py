@@ -12,14 +12,7 @@ import time
 
 # Define the Streamlit app
 def app():
-    if "X" not in st.session_state: 
-        st.session_state.X = []
-    
-    if "y" not in st.session_state: 
-        st.session_state.y = []
 
-    if "scaler" not in st.session_state:
-        st.session_state["scaler"] = StandardScaler()
 
     if "X_train" not in st.session_state:
         st.session_state.X_train = []
@@ -33,8 +26,6 @@ def app():
     if "y_test" not in st.session_state:
             st.session_state.y_test = []
 
-    if "X_test_scaled" not in st.session_state:
-            st.session_state.X_test_scaled = []
 
     if "dataset_ready" not in st.session_state:
         st.session_state.dataset_ready = False 
@@ -155,14 +146,7 @@ def app():
     st.session_state.y_train = y_train
     st.session_state.y_test = y_test
 
-    # Standardize features using StandardScaler (recommended)
-    scaler = st.session_state["scaler"] 
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
-    st.session_state.X_test_scaled = X_test_scaled
-
-    # save the scaler object for later use
-    st.session_state["scaler"] = scaler
+    st.session_state.dataset_ready = True
 
     if st.button("Show Graphs"):
         bins = [10, 30, 50, 70, 90]
