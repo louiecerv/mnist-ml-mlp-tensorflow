@@ -114,9 +114,8 @@ def app():
     # Load the data dataset
     df = pd.read_csv('heart.csv', header=0)
 
-    st.write('Browse the Dataset')
-    st.write(df)
-
+    with st.expander('Click to browse the dataset'):
+        st.write(df)
 
     with st.expander('Click to display unique values in each feature.'):
         # Get column names and unique values
