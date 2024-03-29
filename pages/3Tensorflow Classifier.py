@@ -118,15 +118,16 @@ def app():
         # Plot the training and validation accuracy curves using ax
         ax.plot(train_acc, label='Training Accuracy')
         ax.plot(val_acc, label='Validation Accuracy')
+
+
+        # Set labels and title using ax
+        ax.set_xlabel('Epoch')
+        ax.set_ylabel('Accuracy')
+        ax.set_title('Training and Validation Accuracy')
+
+        # Add legend using ax
+        ax.legend()
         st.pyplot(fig)
-
-# Set labels and title using ax
-ax.set_xlabel('Epoch')
-ax.set_ylabel('Accuracy')
-ax.set_title('Training and Validation Accuracy')
-
-# Add legend using ax
-ax.legend()
 
         # update the progress bar
         for i in range(100):
