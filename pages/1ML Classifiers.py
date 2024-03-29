@@ -34,10 +34,6 @@ def app():
     X_test = st.session_state.X_test
     y_test = st.session_state.y_test
 
-    
-    st.subheader('Performance of ' + classifier)
-    st.write(text)
-
     if st.button("Begin Training"):
 
         if selected_option =='K Nearest Neighbor':
@@ -59,7 +55,10 @@ def app():
             well when the features are independent, which might not perfectly hold true 
             for data found in the heart disease dataset."""
             classifier = "Naive Bayes"
-                    
+            
+        st.subheader('Performance of ' + classifier)
+        st.write(text)
+
         clf.fit(X_train, y_train)
         y_test_pred = clf.predict(X_test)
 
