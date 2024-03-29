@@ -43,6 +43,11 @@ def app():
         step=10
     )
 
+    X_train = st.session_state.X_train
+    y_train = st.session_state.y_train
+    X_test = st.session_state.X_test
+    y_test = st.session_state.y_test
+    
     # Define the MLP regressor model
     clf = MLPClassifier(hidden_layer_sizes=(hidden_layers,5), 
             solver=solver, activation=activation, 
@@ -50,8 +55,9 @@ def app():
 
     text = """Recommended ANN parameters: solver=lbfgs, activation=relu, n_hidden_layer=150, max_iter=150"""
     st.write(text)
+    
     if st.button('Start Training'):
-        progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
+        progress_bar = st.progress(0, text="Training the MLP regressor can take some time please wait...")
 
         # Train the model 
         clf.fit(X_train, y_train)
@@ -65,19 +71,14 @@ def app():
         # Progress bar reaches 100% after the loop completes
         st.success("Regressor training completed!") 
 
-    st.subheader('Performance of the MLP-ANN Classifier on the Heart Disease Dataset')
-    text = """We test the performance of the MLP Classifer using the 20% of the dataset that was
-    set aside for testing. The confusion matrix and classification report are presented below."""
-    st.write(text)
-    
-    if st.button('Begin Test'):
-        progress_bar = st.progress(0, text="Performance test has started please wait...")
+        st.subheader('Performance of the MLP-ANN Classifier on the Heart Disease Dataset')
+        text = """We test the performance of the MLP Classifer using the 20% of the dataset that was
+        set aside for testing. The confusion matrix and classification report are presented below."""
+        st.write(text)
 
-        X_test = st.session_state.X_test
         # Make predictions on the test set
         y_test_pred = clf.predict(X_test)
-        y_test = st.session_state.y_test
-
+        
         # update the progress bar
         for i in range(100):
             # Update progress bar value
@@ -125,7 +126,7 @@ def app():
         st.write(text)
         st.subheader('Performance Metrics')
         st.text(classification_report(y_test, y_test_pred))
-  
+
         text = """An accuracy of more than 80% on the heart disease dataset for the MLP classifier 
         indicates that the model performs well on the data it was trained on. It can correctly 
         identify 80% of the data points as having or not having heart disease based on the features 
