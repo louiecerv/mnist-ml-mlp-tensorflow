@@ -4,10 +4,10 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-import tensorflow
+import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
-
+from tensorflow.keras.callbacks import Callback
 import time
 
 # Define the Streamlit app
