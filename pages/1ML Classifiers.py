@@ -13,6 +13,9 @@ import time
 
 # Define the Streamlit app
 def app():
+    if "dataset_ready" not in st.session_state:
+        st.error("Dataset must be loaded. Click Heart Disease in the sidebar.")
+        
     st.subheader("Heart Disease Classification as a Binary Task")
     text = """In a heart disease classification task, the objective is to build 
     a model that can predict whether a patient is likely to have heart 
@@ -49,7 +52,7 @@ def app():
     specific problem can depend on the characteristics of the data and the desired 
     model properties. """
     st.write(text)
-    
+
     #add the classifier selection to the sidebar
     clf = KNeighborsClassifier(n_neighbors=5)
     options = ['K Nearest Neighbor', 'Support Vector Machine', 'Naive Bayes']
