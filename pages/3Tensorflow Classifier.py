@@ -101,14 +101,32 @@ def app():
         progress_bar = st.progress(0, text="Training the model please wait...")
 
         # Train the model
-        model.fit(
+        history = model.fit(
             X_train,
             y_train, 
             epochs=epochs, 
             validation_data=(X_test, y_test),
             callbacks=[CustomCallback()])
+        
+        # Extract training and validation accuracy from history
+        train_acc = history.history['accuracy']
+        val_acc = history.history['val_accuracy']
 
-        model.summary()
+        # Create a figure and an axes object
+        fig, ax = plt.subplots()
+
+        # Plot the training and validation accuracy curves using ax
+        ax.plot(train_acc, label='Training Accuracy')
+        ax.plot(val_acc, label='Validation Accuracy')
+        st.pyplot(fig)
+
+# Set labels and title using ax
+ax.set_xlabel('Epoch')
+ax.set_ylabel('Accuracy')
+ax.set_title('Training and Validation Accuracy')
+
+# Add legend using ax
+ax.legend()
 
         # update the progress bar
         for i in range(100):
@@ -120,8 +138,7 @@ def app():
         st.success("Model training completed!") 
 
         # Evaluate the model on the test data
-        loss, accuracy = model.evaluate(X_test, y_test,
-            callbacks=[CustomCallback()])
+        loss, accuracy = model.evaluate(X_test, y_test)
         st.write("Test accuracy:", accuracy)
 
 # Define a custom callback function to update the Streamlit interface
