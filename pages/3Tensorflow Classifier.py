@@ -140,6 +140,37 @@ def app():
         loss, accuracy = model.evaluate(X_test, y_test)
         st.write("Test accuracy:", accuracy)
 
+        # Extract loss and accuracy values from history
+        train_loss = history.history['loss']
+        val_loss = history.history['val_loss']
+        train_acc = history.history['accuracy']
+        val_acc = history.history['val_accuracy']
+
+        # Create the figure and axes
+        fig, ax1 = plt.subplots()
+
+        # Plot loss on primary axis (ax1)
+        ax1.plot(train_loss, label='Training Loss')
+        ax1.plot(val_loss, label='Validation Loss')
+
+        # Create a twin axis for accuracy (ax2)
+        ax2 = ax1.twinx()
+
+        # Plot accuracy on the twin axis (ax2)
+        ax2.plot(train_acc, 'g--', label='Training Accuracy')
+        ax2.plot(val_acc, 'r--', label='Validation Accuracy')
+
+        # Set labels and title
+        ax1.set_xlabel('Epoch')
+        ax1.set_ylabel('Loss')
+        ax2.set_ylabel('Accuracy')
+        fig.suptitle('Training and Validation Loss & Accuracy')
+
+        # Add legends
+        ax1.legend(loc='upper left')
+        ax2.legend(loc='upper right') 
+        st.pyplot(fig)       
+
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs=None):
