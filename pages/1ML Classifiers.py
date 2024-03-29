@@ -34,20 +34,14 @@ def app():
     X_test = st.session_state.X_test
     y_test = st.session_state.y_test
 
+    
+    st.subheader('Performance of ' + classifier)
+    st.write(text)
+
     if st.button("Begin Training"):
-        clf.fit(X_train, y_train)
-        y_test_pred = clf.predict(X_test)
-
-        st.subheader('Confusion Matrix')
-        st.write('Confusion Matrix')
-        cm = confusion_matrix(y_test, y_test_pred)
-        st.text(cm)
-
-        st.subheader('Performance Metrics')
-        st.text(classification_report(y_test, y_test_pred))
 
         if selected_option =='K Nearest Neighbor':
-            text = """KNN achieves good accuracy on the Fashion MNIST dataset, often 
+            text = """KNN achieves good accuracy on the heart disease dataset, often 
             reaching around 85-90%. However, it can be slow for large datasets 
             due to needing to compare each test image to all training images. 
             Additionally, choosing the optimal number of neighbors (k) can be 
@@ -63,11 +57,21 @@ def app():
             text = """Naive Bayes is generally faster than the other two options but 
             may achieve slightly lower accuracy, typically around 80-85%. It performs 
             well when the features are independent, which might not perfectly hold true 
-            for image data like the Fashion MNIST."""
+            for data found in the heart disease dataset."""
             classifier = "Naive Bayes"
-        
-        st.write('Performance of ' + classifier)
-        st.write(text)
+                    
+        clf.fit(X_train, y_train)
+        y_test_pred = clf.predict(X_test)
+
+        st.subheader('Confusion Matrix')
+        st.write('Confusion Matrix')
+        cm = confusion_matrix(y_test, y_test_pred)
+        st.text(cm)
+
+        st.subheader('Performance Metrics')
+        st.text(classification_report(y_test, y_test_pred))
+
+
 
 
 
