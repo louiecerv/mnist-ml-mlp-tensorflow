@@ -30,7 +30,7 @@ def app():
     if "dataset_ready" not in st.session_state:
         st.session_state.dataset_ready = False 
 
-    text = """Multi-Layer Perceptron Classifier on the Heart Disease Dataset"""
+    text = """Three-way comparison of ML Classifiers, MLP and Tensorflow Artificial Neural Networks on the Heart Disease Dataset"""
     st.subheader(text)
 
     text = """Louie F. Cervantes, M. Eng. (Information Engineering) \n
@@ -43,12 +43,12 @@ def app():
     st.image('heart-disease.jpg', caption="Heart Disease Diagnosis using MLP-ANN")
 
     text = """
-    This Streamlit app leverages an MLP classifier to predict the presence or absence of 
-    heart disease based on your input of various heart symptoms. The data used to train 
+    This Streamlit app leverages various classifiers to predict the presence or absence of 
+    heart disease based on the input of various heart symptoms. The data used to train 
     the model comes from the heart disease dataset 
     [https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset].
-    \nProvide information on factors like chest pain, blood pressure, and cholesterol, 
-    and this app will estimate your likelihood of having heart disease.
+    \nFactors such as chest pain, blood pressure, and cholesterol, 
+    are predictors that can estimate the likelihood of having heart disease.
     \nDisclaimer: This app is for informational purposes only and should not be 
     used for definitive medical diagnosis. 
     Please consult a healthcare professional for any concerns about your heart health.
@@ -91,7 +91,7 @@ def app():
     text = """This data set dates from 1988 and consists of four databases: 
     Cleveland, Hungary, Switzerland, and Long Beach V. It contains 76 attributes, 
     including the predicted attribute, but all published experiments 
-    refer to using a subset of 14 of them. The "target" field refers to the 
+    refer to using a subset of 14 of them. The "target" variable refers to the 
     presence of heart disease in the patient. It is integer valued 0 = no 
     disease and 1 = disease.
     \nAttribute Information:
@@ -117,17 +117,19 @@ def app():
     st.write('Browse the Dataset')
     st.write(df)
 
-     # Get column names and unique values
-    columns = df.columns
-    unique_values = {col: df[col].unique() for col in columns}    
-    
-    # Display unique values for each column
-    st.write("\n**Unique Values:**")
-    for col, values in unique_values.items():
-        st.write(f"- {col}: {', '.join(map(str, values))}")
+
+    with st.expander('Click to display unique values in each feature.'):
+        # Get column names and unique values
+        columns = df.columns
+        unique_values = {col: df[col].unique() for col in columns}    
+        
+        # Display unique values for each column
+        st.write("\n**Unique Values:**")
+        for col, values in unique_values.items():
+            st.write(f"- {col}: {', '.join(map(str, values))}")
 
     st.write('Descriptive Statistics')
-    st.write(df.describe().T)
+    st.write(df.describe(include='all').T)
 
     # Separate features and target variable
     X = df.drop('target', axis=1)  # Target variable column name
@@ -148,7 +150,7 @@ def app():
 
     st.session_state.dataset_ready = True
 
-    if st.button("Show Graphs"):
+    with st.expander('Click to show the graphs'):
         bins = [10, 30, 50, 70, 90]
         labels = ['10-29', '30-49', '50-69', '70-89']
         df['age_group'] = pd.cut(df['age'], bins, labels=labels)
