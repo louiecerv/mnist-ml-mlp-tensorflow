@@ -120,7 +120,8 @@ def app():
         st.success("Model training completed!") 
 
         # Evaluate the model on the test data
-        loss, accuracy = model.evaluate(X_test, y_test)
+        loss, accuracy = model.evaluate(X_test, y_test,
+            callbacks=[CustomCallback()])
         st.write("Test accuracy:", accuracy)
 
 # Define a custom callback function to update the Streamlit interface
