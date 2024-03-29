@@ -123,6 +123,15 @@ def app():
         loss, accuracy = model.evaluate(X_test, y_test)
         st.write("Test accuracy:", accuracy)
 
+# Define a custom callback function to update the Streamlit interface
+class CustomCallback(tf.keras.callbacks.Callback):
+    def on_epoch_end(self, epoch, logs=None):
+        # Get the current loss and accuracy metrics
+        loss = logs['loss']
+        accuracy = logs['accuracy']
+        
+        # Update the Streamlit interface with the current epoch's output
+        st.text(f"Epoch {epoch}: loss = {loss:.4f}, accuracy = {accuracy:.4f}")
 
 #run the app
 if __name__ == "__main__":
