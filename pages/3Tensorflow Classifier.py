@@ -108,34 +108,6 @@ def app():
             validation_data=(X_test, y_test),
             callbacks=[CustomCallback()])
         
-        # Extract training and validation accuracy from history
-        train_acc = history.history['accuracy']
-        val_acc = history.history['val_accuracy']
-
-        # Create a figure and an axes object
-        fig, ax = plt.subplots()
-
-        # Plot the training and validation accuracy curves using ax
-        ax.plot(train_acc, label='Training Accuracy')
-        ax.plot(val_acc, label='Validation Accuracy')
-        # Set labels and title using ax
-        ax.set_xlabel('Epoch')
-        ax.set_ylabel('Accuracy')
-        ax.set_title('Training and Validation Accuracy')
-
-        # Add legend using ax
-        ax.legend()
-        st.pyplot(fig)
-
-        # update the progress bar
-        for i in range(100):
-            # Update progress bar value
-            progress_bar.progress(i + 1)
-            # Simulate some time-consuming task (e.g., sleep)
-            time.sleep(0.01)
-        # Progress bar reaches 100% after the loop completes
-        st.success("Model training completed!") 
-
         # Evaluate the model on the test data
         loss, accuracy = model.evaluate(X_test, y_test)
         st.write("Test accuracy:", accuracy)
@@ -169,7 +141,16 @@ def app():
         # Add legends
         ax1.legend(loc='upper left')
         ax2.legend(loc='upper right') 
-        st.pyplot(fig)       
+        st.pyplot(fig)   
+
+        # update the progress bar
+        for i in range(100):
+            # Update progress bar value
+            progress_bar.progress(i + 1)
+            # Simulate some time-consuming task (e.g., sleep)
+            time.sleep(0.01)
+        # Progress bar reaches 100% after the loop completes
+        st.success("Model training and testing completed!") 
 
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
