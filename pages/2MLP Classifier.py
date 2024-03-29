@@ -18,7 +18,7 @@ def app():
     options = ["relu", "tanh", "logistic"]
     activation = st.sidebar.selectbox('Select the activation function:', options)
 
-    options = ["adam", "lbfgs", "sgd"]
+    options = ["lbfgs", "adam", "sgd"]
     solver = st.sidebar.selectbox('Select the solver:', options)
 
     hidden_layers = st.sidebar.slider(      
