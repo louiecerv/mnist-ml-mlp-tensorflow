@@ -8,6 +8,7 @@ from sklearn import tree
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, classification_report
 import time
 
 # Define the Streamlit app
