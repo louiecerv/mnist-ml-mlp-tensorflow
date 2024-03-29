@@ -118,8 +118,6 @@ def app():
         # Plot the training and validation accuracy curves using ax
         ax.plot(train_acc, label='Training Accuracy')
         ax.plot(val_acc, label='Validation Accuracy')
-
-
         # Set labels and title using ax
         ax.set_xlabel('Epoch')
         ax.set_ylabel('Accuracy')
