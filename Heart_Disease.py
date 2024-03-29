@@ -6,6 +6,7 @@ import altair as alt
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 
 import time
 
@@ -141,8 +142,12 @@ def app():
     X = df.drop('target', axis=1)  # Target variable column name
     y = df['target']
 
-    # Split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    # Preprocess the data (e.g., scaling)
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
     # store for later use
     st.session_state.X_train = X_train

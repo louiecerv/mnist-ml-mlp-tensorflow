@@ -39,17 +39,14 @@ def app():
         label="Set the max iterations:",
         min_value=100,
         max_value=300,
-        value=120,  
+        value=100,  
         step=10
     )
 
     # Define the MLP regressor model
-    clf = MLPClassifier(hidden_layer_sizes=(hidden_layers,), 
+    clf = MLPClassifier(hidden_layer_sizes=(hidden_layers,5), 
             solver=solver, activation=activation, 
             max_iter=max_iter, random_state=42)
-
-    #store the clf object for later use
-    st.session_state.clf = clf
 
     text = """Recommended ANN parameters: solver=lbfgs, activation=relu, n_hidden_layer=150, max_iter=150"""
     st.write(text)
@@ -57,7 +54,7 @@ def app():
         progress_bar = st.progress(0, text="Training the MLP regressor can take up to five minutes please wait...")
 
         # Train the model 
-        train_model(X_train_scaled, y_train)
+        clf.fit(X_train, y_train)
 
         # update the progress bar
         for i in range(100):
@@ -76,9 +73,9 @@ def app():
     if st.button('Begin Test'):
         progress_bar = st.progress(0, text="Performance test has started please wait...")
 
-        X_test_scaled = st.session_state.X_test_scaled
+        X_test = st.session_state.X_test
         # Make predictions on the test set
-        y_test_pred = st.session_state.clf.predict(X_test_scaled)
+        y_test_pred = clf.predict(X_test)
         y_test = st.session_state.y_test
 
         # update the progress bar
@@ -153,10 +150,6 @@ def app():
         with st.expander('Click to view more details.'):
             st.write(text)
 
-def train_model(X_train_scaled, y_train):
-    clf = st.session_state.clf 
-    clf.fit(X_train_scaled, y_train)
-    st.session_state.clf = clf
 
 #run the app
 if __name__ == "__main__":
