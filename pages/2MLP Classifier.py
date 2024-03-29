@@ -5,6 +5,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix, classification_report
 import time
 
 # Define the Streamlit app
@@ -55,7 +56,7 @@ def app():
 
     text = """Recommended ANN parameters: solver=lbfgs, activation=relu, n_hidden_layer=150, max_iter=150"""
     st.write(text)
-    
+
     if st.button('Start Training'):
         progress_bar = st.progress(0, text="Training the MLP regressor can take some time please wait...")
 
