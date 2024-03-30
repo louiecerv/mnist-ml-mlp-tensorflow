@@ -142,8 +142,7 @@ def app():
             y_train, 
             epochs=epochs, 
             validation_data=(X_test, y_test),
-            callbacks=[CustomCallback()],
-            metrics=['mean_absolute_error'])
+            callbacks=[CustomCallback()],)
         
         # Evaluate the model on the test data
         loss, mean_squared_error = model.evaluate(X_test, y_test)  # Obtain loss and MSE
