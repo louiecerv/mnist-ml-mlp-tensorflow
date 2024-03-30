@@ -125,7 +125,7 @@ def app():
 
         text = """Mean Squared Error (MSE) and R-squared (R²) are two commonly used metrics 
         to evaluate the performance of an Artificial Neural Network (ANN) regressor, 
-        which predicts continuous values. Here's a breakdown of each:
+        which predicts continuous values.
         \nMean Squared Error (MSE):
         \nMeasures the average squared difference between the actual values and the 
         predicted values by your ANN regressor.
