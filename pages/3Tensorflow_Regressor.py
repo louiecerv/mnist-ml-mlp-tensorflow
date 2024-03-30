@@ -229,7 +229,7 @@ class CustomCallback(tf.keras.callbacks.Callback):
         loss = logs['loss']
         
         # Update the Streamlit interface with the current epoch's output
-        st.text(f"Epoch {epoch}: loss = {loss:.4f})
+        st.text(f"Epoch {epoch}: loss = {loss:.4f}")
 
 #run the app
 if __name__ == "__main__":
