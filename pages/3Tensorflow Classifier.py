@@ -65,10 +65,10 @@ def app():
 
     n_layers = st.sidebar.slider(      
         label="Number of Neurons in the Hidden Layer:",
-        min_value=5,
-        max_value=15,
-        value=5,  # Initial value
-        step=5
+        min_value=16,
+        max_value=128,
+        value=64,  # Initial value
+        step=16
     )
 
     epochs = st.sidebar.slider(   
@@ -79,15 +79,14 @@ def app():
         step=10
     )
 
-    # Define the neural network model
-    model = keras.Sequential([
-        layers.Dense(10, activation=h_activation, input_shape=(X_train.shape[1],)),
-        layers.Dense(5, activation=h_activation),
-        layers.Dense(1, activation=o_activation),
-    ])
+    # Define the ANN model
+    model = Sequential()
+    model.add(Dense(units=n_layers, activation=activation, input_dim=3))
+    model.add(Dense(units=32, activation=activation))
+    model.add(Dense(units=1))
 
     # Compile the model
-    model.compile(loss="binary_crossentropy", optimizer=optimizer, metrics=["accuracy"])
+    model.compile(loss="mse", optimizer=optimizer)
 
     with st.expander("CLick to display guide on how to select parameters"):
         text = """ReLU (Rectified Linear Unit): This is the most common activation function used 
@@ -176,6 +175,18 @@ def app():
         ax1.legend(loc='upper left')
         ax2.legend(loc='upper right') 
         st.pyplot(fig)   
+
+        # Evaluate the model's performance
+        from sklearn.metrics import mean_squared_error, r2_score
+
+        # Make predictions on the test set
+        y_pred = model.predict(X_test)
+
+        mse = mean_squared_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
+
+        st.write("Mean Squared Error:", mse)
+        st.write("R2 Score:", r2)
 
         # update the progress bar
         for i in range(100):
