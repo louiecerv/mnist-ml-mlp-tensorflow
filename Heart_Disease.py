@@ -127,7 +127,7 @@ def app():
         for col, values in unique_values.items():
             st.write(f"- {col}: {', '.join(map(str, values))}")
 
-    st.write('Descriptive Statistics')
+    st.subheader('Descriptive Statistics')
     st.write(df.describe(include='all').T)
 
     # Separate features and target variable
