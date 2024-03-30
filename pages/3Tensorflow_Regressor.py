@@ -202,21 +202,28 @@ def app():
         # Progress bar reaches 100% after the loop completes
         st.success("Model training and testing completed!") 
 
-        text = """Based on the graph, the TensorFlow ANN appears to be performing well on 
-        both the training and validation sets. The training accuracy is around 95% and 
-        the validation accuracy is around 90%, which suggests that the model is 
-        generalizing well to unseen data. The training loss and validation loss are 
-        both around 0.2, which is also relatively low.
-        These results suggest that the TensorFlow ANN is a well-trained model that is 
-        performing well on both the training and validation sets.
-        \nThe training accuracy and loss curves are both decreasing over time, which 
-        suggests that the model is learning.
-        The validation accuracy and loss curves are also decreasing over time, 
-        but at a slower rate than the training curves. This is expected, as the validation 
-        set is typically held out from the training process and is used to assess how well 
-        the model generalizes to unseen data.
-        \nThe gap between the training and validation curves is relatively small, 
-        which again suggests that the model is generalizing well."""
+        text = """The image you sent appears to be a graph of the training and validation 
+        loss and mean squared error (MSE) of an artificial neural network (ANN) 
+        regressor trained on an advertising dataset.
+        \n**Loss**
+        The loss can be interpreted as how well the model is performing on a given set of
+        data. Lower loss indicates better performance. In the graph, both the training 
+        loss and validation loss are decreasing over time, which suggests that the 
+        model is learning and improving its performance on both the training data and 
+        the validation data.
+        \n**Mean Squared Error (MSE)**
+        MSE is another way to measure how well a model is performing. It represents the 
+        average squared difference between the predicted values and the actual values. 
+        Lower MSE indicates better performance.  Similar to loss, the MSE  values in 
+        the graph are also decreasing over time, which indicates that the model is
+        getting better at predicting the target variable.
+        \nInterpretation. The fact that both the training loss and validation loss are decreasing
+        and the MSE is decreasing suggests that the ANN regressor is learning the 
+        patterns in the advertising data and is able to make good predictions on 
+        unseen data.
+        * The complexity of the model: More complex models can potentially learn more complex patterns in the data, but they are also more prone to overfitting. Overfitting is a condition where the model performs well on the training data but poorly on unseen data.
+        * The amount of data: The amount of data can also affect the performance of an ANN regressor. More data can help the model learn more generalizable patterns.
+        * The choice of hyperparameters: Hyperparameters are the settings that control the learning process of an ANN regressor. Different hyperparameter settings can lead to different model performance."""
         st.write(text)
 
 # Define a custom callback function to update the Streamlit interface
