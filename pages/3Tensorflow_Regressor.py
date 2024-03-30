@@ -227,9 +227,10 @@ class CustomCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs=None):
         # Get the current loss and accuracy metrics
         loss = logs['loss']
+        mse = logs['mean_squared_error']
         
         # Update the Streamlit interface with the current epoch's output
-        st.text(f"Epoch {epoch}: loss = {loss:.4f}")
+        st.text(f"Epoch {epoch}: loss = {loss:.4f} MSE = {mse:.4f}")
 
 #run the app
 if __name__ == "__main__":
