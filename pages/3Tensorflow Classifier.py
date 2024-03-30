@@ -186,6 +186,23 @@ def app():
         # Progress bar reaches 100% after the loop completes
         st.success("Model training and testing completed!") 
 
+        text = """Based on the graph, the TensorFlow ANN appears to be performing well on 
+        both the training and validation sets. The training accuracy is around 95% and 
+        the validation accuracy is around 90%, which suggests that the model is 
+        generalizing well to unseen data. The training loss and validation loss are 
+        both around 0.2, which is also relatively low.
+        These results suggest that the TensorFlow ANN is a well-trained model that is 
+        performing well on both the training and validation sets.
+        \nThe training accuracy and loss curves are both decreasing over time, which 
+        suggests that the model is learning.
+        The validation accuracy and loss curves are also decreasing over time, 
+        but at a slower rate than the training curves. This is expected, as the validation 
+        set is typically held out from the training process and is used to assess how well 
+        the model generalizes to unseen data.
+        \nThe gap between the training and validation curves is relatively small, 
+        which again suggests that the model is generalizing well."""
+        st.write(text)
+
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs=None):
