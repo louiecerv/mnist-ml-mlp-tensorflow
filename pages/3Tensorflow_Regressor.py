@@ -89,7 +89,7 @@ def app():
     model.add(Dense(units=1, activation=o_activation))
 
     # Compile the model
-    model.compile(loss="mse", optimizer=optimizer, metrics=['mean_squared_error'])
+    model.compile(loss="mse", optimizer=optimizer, metrics=['mean_squared_error', 'mean_absolute_error'])
 
     with st.expander("CLick to display guide on how to select parameters"):
         text = """ReLU (Rectified Linear Unit): This is the most common activation function used 
