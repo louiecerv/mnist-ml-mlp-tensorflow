@@ -125,9 +125,9 @@ def app():
         \nIt's always recommended to experiment with different activation functions to see 
         what works best for your specific CNN and dataset. You can try replacing "relu" 
         with "leaky_relu" or "tanh" in the hidden layers and "sigmoid" with "softmax" 
-        in the output layer (if applicable) to see if it improves performance.
+        in the output layer to see if it improves performance.
         \nBy understanding these activation functions and their trade-offs, you can 
-        make informed choices to optimize your CNN for the task at hand."""
+        make informed choices to optimize your ANN for the task at hand."""
         st.write(text)
 
     if st.button('Start Training'):
