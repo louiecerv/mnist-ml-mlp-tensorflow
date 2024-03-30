@@ -144,7 +144,7 @@ def app():
             validation_data=(X_test, y_test),
             callbacks=[CustomCallback()],
             loss='mean_squared_error',
-            metrics=['mean_absolute_error', 'mean_squared_error'])
+            metrics=['mean_absolute_error'])
         
         # Evaluate the model on the test data
         loss, mean_squared_error = model.evaluate(X_test, y_test)  # Obtain loss and MSE
@@ -227,6 +227,7 @@ def app():
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs=None):
+        self.model.history.history['mean_squared_error'].append(logs['val_mean_squared_error'])
         # Get the current loss and accuracy metrics
         loss = logs['loss']
         mse = logs['mean_squared_error']
