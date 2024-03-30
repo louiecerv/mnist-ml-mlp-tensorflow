@@ -221,10 +221,17 @@ def app():
         and the MSE is decreasing suggests that the ANN regressor is learning the 
         patterns in the advertising data and is able to make good predictions on 
         unseen data.
-        * The complexity of the model: More complex models can potentially learn more complex patterns in the data, but they are also more prone to overfitting. Overfitting is a condition where the model performs well on the training data but poorly on unseen data.
-        * The amount of data: The amount of data can also affect the performance of an ANN regressor. More data can help the model learn more generalizable patterns.
-        * The choice of hyperparameters: Hyperparameters are the settings that control the learning process of an ANN regressor. Different hyperparameter settings can lead to different model performance."""
-        st.write(text)
+        \n* The complexity of the model: More complex models can potentially learn more 
+        complex patterns in the data, but they are also more prone to overfitting. 
+        Overfitting is a condition where the model performs well on the training data 
+        but poorly on unseen data.
+        \n* The amount of data: The amount of data can also affect the performance of 
+        an ANN regressor. More data can help the model learn more generalizable patterns.
+        \n* The choice of hyperparameters: Hyperparameters are the settings that control 
+        the learning process of an ANN regressor. Different hyperparameter settings can 
+        lead to different model performance."""
+        with st.expander("Click to display more information about the metrics."):
+            st.write(text)
 
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
