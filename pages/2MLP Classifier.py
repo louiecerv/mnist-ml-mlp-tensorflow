@@ -120,8 +120,9 @@ def app():
 
         # Print performance metrics
         st.subheader('Performance Metrics')
-        st.write("Mean Squared Error:", mse)
-        st.write("R2 Score:", r2)
+        st.write("Mean Squared Error: {:.4f}".format(mse))  
+        st.write("R2 score: {:.4f}".format(r2))
+
 
 #run the app
 if __name__ == "__main__":
