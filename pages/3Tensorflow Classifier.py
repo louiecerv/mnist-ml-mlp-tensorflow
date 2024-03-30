@@ -84,9 +84,9 @@ def app():
 
     # Define the ANN model
     model = Sequential()
-    model.add(Dense(units=n_layers, activation=activation, input_dim=3))
-    model.add(Dense(units=32, activation=activation))
-    model.add(Dense(units=1))
+    model.add(Dense(units=n_layers, activation=h_activation, input_dim=3))
+    model.add(Dense(units=32, activation=h_activation))
+    model.add(Dense(units=1, activation=o_activation))
 
     # Compile the model
     model.compile(loss="mse", optimizer=optimizer)
