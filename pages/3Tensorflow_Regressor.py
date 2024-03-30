@@ -145,7 +145,7 @@ def app():
             callbacks=[CustomCallback()],)
         
         # Evaluate the model on the test data
-        loss, mean_squared_error = model.evaluate(X_test, y_test)  # Obtain loss and MSE
+        loss, mean_absolute_error = model.evaluate(X_test, y_test)  # Obtain loss and MSE
 
         # Display evaluation results
         st.write("Test loss:", loss)
