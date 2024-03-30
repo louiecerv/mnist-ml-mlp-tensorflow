@@ -145,14 +145,19 @@ def app():
             callbacks=[CustomCallback()])
         
         # Evaluate the model on the test data
-        loss, accuracy = model.evaluate(X_test, y_test)
-        st.write("Test accuracy:", accuracy)
+        loss, mean_squared_error = model.evaluate(X_test, y_test)  # Obtain loss and MSE
 
-        # Extract loss and accuracy values from history
+        # Display evaluation results
+        st.write("Test loss:", loss)
+        st.write("Test mean squared error (MSE):", mean_squared_error)
+
+        # Extract loss and MAE/MSE values from history
         train_loss = history.history['loss']
         val_loss = history.history['val_loss']
-        train_acc = history.history['accuracy']
-        val_acc = history.history['val_accuracy']
+        train_mae = history.history['mean_absolute_error']
+        val_mae = history.history['val_mean_absolute_error']
+        train_mse = history.history['mean_squared_error']
+        val_mse = history.history['val_mean_squared_error']
 
         # Create the figure and axes
         fig, ax1 = plt.subplots()
@@ -165,14 +170,14 @@ def app():
         ax2 = ax1.twinx()
 
         # Plot accuracy on the twin axis (ax2)
-        ax2.plot(train_acc, 'g--', label='Training Accuracy')
-        ax2.plot(val_acc, 'r--', label='Validation Accuracy')
+        ax2.plot(train_mse, 'g--', label='Training MSE')
+        ax2.plot(val_mse, 'r--', label='Validation MSE')
 
         # Set labels and title
         ax1.set_xlabel('Epoch')
         ax1.set_ylabel('Loss')
-        ax2.set_ylabel('Accuracy')
-        fig.suptitle('Training and Validation Loss & Accuracy')
+        ax2.set_ylabel('MSE')
+        fig.suptitle('Training and Validation Loss & MSE')
 
         # Add legends
         ax1.legend(loc='upper left')
