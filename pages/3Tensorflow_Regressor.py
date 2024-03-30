@@ -16,38 +16,33 @@ import time
 # Define the Streamlit app
 def app():
 
-    st.subheader('Binary Classification Task for Heart Disease Prediction')
-    text = """The objective is to build a model that can classify whether a patient has 
-    heart disease or not based on various features. It's a binary classification task 
-    because the model predicts one of two possible outcomes:
-    \nPresence of heart disease (positive class)
-    \nAbsence of heart disease (negative class)
-    
-    \nTensorFlow and Keras for Building the ANN
-    TensorFlow provides a powerful platform for numerical computations, and Keras acts 
-    as a high-level API on top of TensorFlow, simplifying the ANN development process. 
-    \nData Preprocessing:
-    \nLoad the heart disease dataset (commonly used ones include Cleveland Clinic 
-    Foundation data from UCI Machine Learning Repository).
-    Preprocess the data by handling missing values, converting categorical variables 
-    (if any) to numerical representations using techniques like one-hot encoding, 
-    and normalizing the features to a common scale.
-    \nModel Building: Define the ANN architecture using Keras. This typically 
-    involves: An input layer with a size matching the number of features in the data. 
-    One or more hidden layers with a specific number of neurons (activation functions 
-    are applied within these layers to introduce non-linearity).
-    An output layer with a single neuron using a sigmoid activation function (squashes 
-    the output between 0 and 1, suitable for binary classification).
-    \nModel Compilation:
-    Specify the loss function (e.g., binary cross-entropy for binary classification) 
-    to measure the model's performance during training.
-    Choose an optimizer (e.g., Adam) that updates the model's weights to minimize the 
-    loss.
-    \nModel Training: Split the data into training and testing sets. Train the model on 
-    the training set, iteratively adjusting the weights to minimize the loss and improve 
-    its ability to distinguish between patients with and without heart disease.
-    \nModel Evaluation: Evaluate the model's performance on the unseen testing set using 
-    metrics loss and accuracy. """
+    st.subheader('Regression Task on Advertising Dataset')
+    text = """The advertising dataset is a classic example used for 
+    supervised regression tasks. It typically contains information on 
+    advertising spend across various channels (TV, Radio, Newspaper) and the 
+    resulting sales figures. The goal of the regression task is to build a 
+    model that can predict sales based on the advertising budget allocated 
+    to each channel.
+    \n* **Target Variable:** Sales (numerical)
+    \n* **Features:** Advertising budget for TV, Radio, Newspaper (numerical)
+    \n* **Model Objective:** Predict sales as accurately as possible given the 
+    advertising budget. 
+    \n1. **Data Loading:** The app loads the advertising dataset using libraries 
+    like Pandas.
+    \n2. **Preprocessing:** The data might require preprocessing steps like handling
+    missing values, scaling features, and splitting the data into training and 
+    testing sets.
+    \n3. **TensorFlow ANN Model:** 
+    * Define a TensorFlow ANN model with an appropriate architecture (e.g., 
+    input layer, hidden layers with activation functions, output layer).
+    * Compile the model with a loss function (e.g., Mean Squared Error) and an optimizer 
+    (e.g., Adam).
+    * Train the model on the training data.
+    \n4. **Evaluation:** 
+    * Evaluate the trained TensorFlow ANN model on the testing data using metrics like Mean Squared Error (MSE) or R-squared.
+    \n5. **Comparison Models:** 
+    * Train separate Machine Learning linear regressors and MLP regressors from scikit-learn on the same data.
+    * Evaluate their performance on the testing data using the same metrics."""
     st.write(text)
 
     X_train = st.session_state.X_train
