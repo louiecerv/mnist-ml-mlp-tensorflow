@@ -5,10 +5,10 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn import tree
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
-from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.svm import SVR
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import mean_squared_error, r2_score
 import time
 
 # Define the Streamlit app
@@ -54,17 +54,17 @@ def app():
     st.write(text)
 
     #add the classifier selection to the sidebar
-    clf = KNeighborsClassifier(n_neighbors=5)
-    options = ['K Nearest Neighbor', 'Support Vector Machine', 'Naive Bayes']
+    clf = KNeighborsRegressor(n_neighbors=5)
+    options = ['K Nearest Neighbor', 'Support Vector Machine', 'Decision Tree']
     selected_option = st.sidebar.selectbox('Select the classifier', options)
     if selected_option =='Support Vector Machine':
-        clf = SVC(kernel='linear')
+        clf = SVR()
         st.session_state['selected_model'] = 1
-    elif selected_option=='Naive Bayes':        
-        clf = GaussianNB()
+    elif selected_option=='Decision Tree':        
+        clf = DecisionTreeRegressor()
         st.session_state['selected_model'] = 2
     else:
-        clf = KNeighborsClassifier(n_neighbors=5)
+        clf = KNeighborsRegressor(n_neighbors=5)
         st.session_state['selected_model'] = 0
 
     X_train = st.session_state.X_train
@@ -87,7 +87,7 @@ def app():
             but choosing the right kernel function and its parameters 
             can be challenging."""
             classifier = 'Support Vector Machine'
-        elif selected_option=='Naive Bayes': 
+        elif selected_option=='Decision Tree': 
             text = """Naive Bayes is generally faster than the other two options but 
             may achieve slightly lower accuracy, typically around 80-85%. It performs 
             well when the features are independent, which might not perfectly hold true 
@@ -100,19 +100,14 @@ def app():
         clf.fit(X_train, y_train)
         y_test_pred = clf.predict(X_test)
 
-        st.subheader('Confusion Matrix')
-        st.write('Confusion Matrix')
-        cm = confusion_matrix(y_test, y_test_pred)
-        st.text(cm)
-
         st.subheader('Performance Metrics')
-        st.text(classification_report(y_test, y_test_pred))
+        # Calculate performance metrics
+        mse = mean_squared_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
 
-
-
-
-
-
+        # Print the performance metrics
+        st.write("Mean Squared Error:", mse)
+        st.write("R-squared:", r2)
 
 #run the app
 if __name__ == "__main__":
