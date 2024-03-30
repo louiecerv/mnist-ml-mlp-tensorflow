@@ -123,6 +123,34 @@ def app():
         st.write("Mean Squared Error: {:.4f}".format(mse))  
         st.write("R2 score: {:.4f}".format(r2))
 
+        text = """Mean Squared Error (MSE) and R-squared (R²) are two commonly used metrics 
+        to evaluate the performance of an Artificial Neural Network (ANN) regressor, 
+        which predicts continuous values. Here's a breakdown of each:
+        \nMean Squared Error (MSE):
+        \nMeasures the average squared difference between the actual values and the 
+        predicted values by your ANN regressor.
+        \nA lower MSE indicates a better fit, meaning the predictions are on average 
+        closer to the actual values.
+        \nMSE is sensitive to outliers, as large errors get squared and contribute more 
+        significantly to the overall error.
+        \nSince MSE is in squared units of the target variable, it can be difficult to 
+        interpret directly.
+        \nR-squared (R²):
+        Represents the proportion of variance in the dependent variable (what you're trying 
+        to predict) that's explained by your ANN regressor. R² ranges from 0 to 1, where 0 
+        indicates no explanatory power and 1 indicates a perfect fit.
+        R² is easier to interpret than MSE as it's on a 0-1 scale. However, it doesn't 
+        tell you the magnitude of the errors.
+        It's important to consider the number of features (independent variables) in your model. 
+        R² can increase simply by adding more features, even if they're not relevant. 
+        For this reason, a variation called Adjusted R² is often used as a penalty for 
+        model complexity.
+        \nTogether:
+        MSE provides an absolute measure of the prediction error, while R² gives you a 
+        relative idea of how well your model explains the variance.
+        Ideally, you want a low MSE and a high R², but there can be trade-offs. 
+        A more complex model might achieve a lower MSE but a higher R² due to overfitting."""
+        st.write(text)
 
 #run the app
 if __name__ == "__main__":
