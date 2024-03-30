@@ -5,6 +5,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.neural_network import MLPRegressor
+from sklearn.metrics import mean_squared_error, r2_score
 
 from sklearn.metrics import confusion_matrix, classification_report
 import time
