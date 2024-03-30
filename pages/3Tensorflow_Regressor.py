@@ -143,7 +143,6 @@ def app():
             epochs=epochs, 
             validation_data=(X_test, y_test),
             callbacks=[CustomCallback()],
-            loss='mean_squared_error',
             metrics=['mean_absolute_error'])
         
         # Evaluate the model on the test data
