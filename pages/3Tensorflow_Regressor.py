@@ -225,7 +225,7 @@ def app():
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs=None):
-        self.model.history['mean_squared_error'].append(logs['mean_squared_error'])
+        self.model.history.history['mean_squared_error'].append(logs['mean_squared_error'])
         # Get the current loss and accuracy metrics
         loss = logs['loss']
         mae = logs['mean_absolute_error']
