@@ -98,7 +98,7 @@ def app():
         st.write(text)
 
         clf.fit(X_train, y_train)
-        y_test_pred = clf.predict(X_test)
+        y_pred = clf.predict(X_test)
 
         st.subheader('Performance Metrics')
         # Calculate performance metrics
