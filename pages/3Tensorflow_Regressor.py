@@ -202,10 +202,7 @@ def app():
         # Progress bar reaches 100% after the loop completes
         st.success("Model training and testing completed!") 
 
-        text = """The image you sent appears to be a graph of the training and validation 
-        loss and mean squared error (MSE) of an artificial neural network (ANN) 
-        regressor trained on an advertising dataset.
-        \n**Loss**
+        text = """\n**Loss**
         The loss can be interpreted as how well the model is performing on a given set of
         data. Lower loss indicates better performance. In the graph, both the training 
         loss and validation loss are decreasing over time, which suggests that the 
