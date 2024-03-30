@@ -145,11 +145,10 @@ def app():
             callbacks=[CustomCallback()],)
         
         # Evaluate the model on the test data
-        loss, mean_absolute_error = model.evaluate(X_test, y_test)  # Obtain loss and MSE
+        loss = model.evaluate(X_test, y_test)  # Obtain loss and MSE
 
         # Display evaluation results
         st.write("Test loss:", loss)
-        st.write("Test mean squared error (MSE):", mean_squared_error)
 
         # Extract loss and MAE/MSE values from history
         train_loss = history.history['loss']
