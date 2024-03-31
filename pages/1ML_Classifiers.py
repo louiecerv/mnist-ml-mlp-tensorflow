@@ -21,7 +21,7 @@ def app():
     prediction. It aims to model the relationship between independent variables 
     (features) and a dependent variable (target) using a linear equation.
     \nModel Creation and Training:
-    \nInstantiate a `LinearRegression` object from 'scikit-learn.'
+    \nInstantiate a `LinearRegression` object from scikit-learn.
     - Fit the model to the training data using `model.fit(X_train, y_train)`, where `
     X_train` is the training features and `y_train` is the training target variable.
     \nPrediction on the Testing Set
