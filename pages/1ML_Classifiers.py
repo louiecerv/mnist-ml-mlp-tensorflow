@@ -16,41 +16,25 @@ def app():
     if "dataset_ready" not in st.session_state:
         st.error("Dataset must be loaded. Click Heart Disease in the sidebar.")
         
-    st.subheader("Heart Disease Classification as a Binary Task")
-    text = """In a heart disease classification task, the objective is to build 
-    a model that can predict whether a patient is likely to have heart 
-    disease based on a set of features. This is a classic example of a 
-    binary classification problem. The model is trained on a dataset where 
-    each data point represents a patient, and includes features like age, 
-    blood pressure, cholesterol levels, etc. Each data point also has a 
-    corresponding label indicating the presence (positive) or absence 
-    (negative) of heart disease.  
-    \nThe goal of the model is to learn the relationship between these features 
-    and the disease, and then use that knowledge to classify new, 
-    unseen patients as belonging to either the "heart disease" or 
-    "no heart disease" category.
-    \nClassifiers chosen:
-    K-Nearest Neighbors (KNN): This algorithm classifies a data point by 
-    identifying the k nearest data points in the training set based on 
-    feature similarity. The majority class among these k neighbors is 
-    then assigned as the predicted class for the new data point. KNN is a 
-    simple and interpretable method, but can be computationally expensive 
-    for large datasets. 
-    \nSupport Vector Machine (SVM):  This algorithm creates a hyperplane in the 
-    feature space that best separates the data points belonging to different classes. 
-    New data points are then classified based on which side of the hyperplane 
-    they fall on. SVMs are known for good performance on various classification 
-    tasks, but can be sensitive to parameter tuning.
-    \nNaive Bayes:** This probabilistic classifier uses Bayes' theorem to calculate 
-    the probability of a data point belonging to a particular class based on its 
-    features. It assumes independence between features, which might not always 
-    hold true in real-world data. However, Naive Bayes is a fast and efficient 
-    classifier that can be effective for certain problems.
-    \nThese three algorithms represent a good selection of common machine 
-    learning approaches for binary classification tasks like heart disease 
-    prediction. Each has its own strengths and weaknesses, and the best choice for a
-    specific problem can depend on the characteristics of the data and the desired 
-    model properties. """
+    st.subheader("Linear Regression Analysis using Machine Learning Regressors")
+    text = """Linear regression is a supervised learning technique for continuous 
+    prediction. It aims to model the relationship between independent variables 
+    (features) and a dependent variable (target) using a linear equation.
+    \nModel Creation and Training:
+    \nInstantiate a `LinearRegression` object from scikit-learn.
+    - Fit the model to the training data using `model.fit(X_train, y_train)`, where `
+    X_train` is the training features and `y_train` is the training target variable.
+    \nPrediction on the Testing Set
+    \nUse the trained model to make predictions on the testing data using `model.predict(X_test)`.
+    \nModel Evaluation:
+    Calculate performance metrics: Common metrics for regression tasks include mean squared 
+    error (MSE), R-squared, and adjusted R-squared. Scikit-learn provides functions like 
+    `mean_squared_error` and `r2_score` to compute these metrics.
+    Interpret the results: Analyze the performance metrics to assess how well the model 
+    generalizes to unseen data.
+    Linear regression assumes a linear relationship between features and the target variable. 
+    If the relationship is non-linear, consider using other regression techniques like polynomial regression or decision tree regression.
+    Regularization techniques like L1 (LASSO) or L2 (Ridge) can be helpful to prevent overfitting, especially with high-dimensional datasets."""
     st.write(text)
 
     #add the classifier selection to the sidebar
