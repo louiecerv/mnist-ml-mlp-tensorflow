@@ -12,7 +12,7 @@ import time
 def app():
     if "dataset_ready" not in st.session_state:
         st.error("Dataset must be loaded. Click Heart Disease in the sidebar.")
-    st.subheader('Regression Task for Advertising Dataset')
+    st.subheader('Neural Network Regressor Performance on the Advertising Dataset')
     text = """The advertising dataset is commonly used for a multiple linear regression task.
     Here, the goal is to predict sales figures based on the amount spent on advertising 
     through different channels like TV, radio, and newspaper. The model learns the 
