@@ -18,8 +18,8 @@ def app():
     through different channels like TV, radio, and newspaper. The model learns the 
     relationship between these advertising expenses (independent variables) and the 
     resulting sales (dependent variable).
-    \nMLP Regressor
-    While linear regression is a good starting point, a more complex model  can be 
+    \n**MLP Regressor**
+    \nWhile linear regression is a good starting point, a more complex model  can be 
     used - a Multi-Layer Perceptron (MLP) regressor. This is a type of artificial 
     neural network that can capture non-linear relationships between the 
     advertising expenses and sales.
