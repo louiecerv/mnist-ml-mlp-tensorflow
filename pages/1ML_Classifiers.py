@@ -16,7 +16,7 @@ def app():
     if "dataset_ready" not in st.session_state:
         st.error("Dataset must be loaded. Click Heart Disease in the sidebar.")
         
-    st.subheader("Linear Regression Analysis using Machine Learning Regressors")
+    st.subheader("Linear Regression Analysis Using Machine Learning Regressors")
     text = """Linear regression is a supervised learning technique for continuous 
     prediction. It aims to model the relationship between independent variables 
     (features) and a dependent variable (target) using a linear equation.
