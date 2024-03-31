@@ -44,7 +44,7 @@ def app():
     hidden_layers = st.sidebar.slider(      
         label="How many hidden layers? :",
         min_value=5,
-        max_value=250,
+        max_value=100,
         value=10,  # Initial value
         step=5
     )
