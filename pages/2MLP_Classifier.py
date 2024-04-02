@@ -72,7 +72,7 @@ def app():
         progress_bar = st.progress(0, text="Training the MLP classifier can take some time please wait...")
 
         # Train the model 
-        clf.fit(X_train, y_train)
+        history = clf.fit(X_train, y_train)
 
         # Retrieve loss and accuracy history from history object
         loss_history = history.loss_curve_
