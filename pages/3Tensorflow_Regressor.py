@@ -4,19 +4,27 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.callbacks import Callback
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
+import tensorflow as tf
+import tensorflow_datasets as tfds
+import matplotlib.pyplot as plt
+
 import time
+
+def normalize_img(image, label):
+    """Normalizes images: `uint8` -> `float32`."""
+    return tf.cast(image, tf.float32) / 255., label
+
 
 # Define the Streamlit app
 def app():
 
-    st.subheader('Regression Task on Advertising Dataset')
+    st.subheader('Tensorflow ANN on the MNIST Digit Dataset')
     text = """The advertising dataset is a classic example used for 
     supervised regression tasks. It typically contains information on 
     advertising spend across various channels (TV, Radio, Newspaper) and the 
@@ -45,10 +53,26 @@ def app():
     * Evaluate their performance on the testing data using the same metrics."""
     st.write(text)
 
-    X_train = st.session_state.X_train
-    y_train = st.session_state.y_train
-    X_test = st.session_state.X_test
-    y_test = st.session_state.y_test
+    (ds_train, ds_test), ds_info = tfds.load(
+        'mnist',
+        split=['train', 'test'],
+        shuffle_files=True,
+        as_supervised=True,
+        with_info=True,
+    )
+
+    ds_train = ds_train.map(
+        normalize_img, num_parallel_calls=tf.data.AUTOTUNE)
+    ds_train = ds_train.cache()
+    ds_train = ds_train.shuffle(ds_info.splits['train'].num_examples)
+    ds_train = ds_train.batch(128)
+    ds_train = ds_train.prefetch(tf.data.AUTOTUNE)
+
+    ds_test = ds_test.map(
+        normalize_img, num_parallel_calls=tf.data.AUTOTUNE)
+    ds_test = ds_test.batch(128)
+    ds_test = ds_test.cache()
+    ds_test = ds_test.prefetch(tf.data.AUTOTUNE)
 
    # Define ANN parameters    
     st.sidebar.subheader('Set the Neural Network Parameters')
@@ -77,14 +101,17 @@ def app():
         step=10
     )
 
-    # Define the ANN model
-    model = Sequential()
-    model.add(Dense(units=n_layers, activation=h_activation, input_dim=3))
-    model.add(Dense(units=n_layers, activation=h_activation))
-    model.add(Dense(units=1, activation=o_activation))
+    model = tf.keras.models.Sequential([
+        tf.keras.layers.Flatten(input_shape=(28, 28)),
+        tf.keras.layers.Dense(128, activation=h_activation),
+        tf.keras.layers.Dense(10, activation = o_activation)
+    ])
 
-    # Compile the model
-    model.compile(loss="mse", optimizer=optimizer, metrics=['mean_squared_error', 'mean_absolute_error'])
+    model.compile(
+        optimizer=tf.keras.optimizers.Adam(0.001),
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        metrics=[tf.keras.metrics.SparseCategoricalAccuracy(), 'accuracy'],
+    )
 
     with st.expander("CLick to display guide on how to select parameters"):
         text = """ReLU (Rectified Linear Unit): This is the most common activation function used 
@@ -131,99 +158,45 @@ def app():
  
         progress_bar = st.progress(0, text="Training the model please wait...")
 
-        # Train the model
         history = model.fit(
-            X_train,
-            y_train, 
-            epochs=epochs, 
-            validation_data=(X_test, y_test),
-            callbacks=[CustomCallback()],)
-        
+            ds_train,
+            epochs=20,
+            validation_data=ds_test,
+        )
+
         # Evaluate the model on the test data
-        model.evaluate(X_test, y_test)  # Obtain loss and MSE
+        accuracy = model.evaluate(ds_test)
+        print("Test accuracy:", accuracy)
 
-
-        # Extract loss and MAE/MSE values from history
+        # Extract loss and accuracy values from history
         train_loss = history.history['loss']
         val_loss = history.history['val_loss']
-        train_mae = history.history['mean_absolute_error']
-        val_mae = history.history['val_mean_absolute_error']
-        train_mse = history.history['mean_squared_error']
-        val_mse = history.history['val_mean_squared_error']
+        train_acc = history.history['accuracy']
+        val_acc = history.history['val_accuracy']
 
-        # Create the figure and axes
-        fig, ax1 = plt.subplots()
+        # Create the figure with two side-by-side subplots
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))  # Adjust figsize for better visualization
 
-        # Plot loss on primary axis (ax1)
+        # Plot loss on the first subplot (ax1)
         ax1.plot(train_loss, label='Training Loss')
         ax1.plot(val_loss, label='Validation Loss')
-
-        # Create a twin axis for accuracy (ax2)
-        ax2 = ax1.twinx()
-
-        # Plot accuracy on the twin axis (ax2)
-        ax2.plot(train_mse, 'g--', label='Training MSE')
-        ax2.plot(val_mse, 'r--', label='Validation MSE')
-
-        # Set labels and title
         ax1.set_xlabel('Epoch')
         ax1.set_ylabel('Loss')
-        ax2.set_ylabel('MSE')
-        fig.suptitle('Training and Validation Loss & MSE')
+        ax1.legend()
 
-        # Add legends
-        ax1.legend(loc='upper left')
-        ax2.legend(loc='upper right') 
-        st.pyplot(fig)   
+        # Plot accuracy on the second subplot (ax2)
+        ax2.plot(train_acc, 'g--', label='Training Accuracy')
+        ax2.plot(val_acc, 'r--', label='Validation Accuracy')
+        ax2.set_xlabel('Epoch')
+        ax2.set_ylabel('Accuracy')
+        ax2.legend()
 
-        # Evaluate the model's performance
-        from sklearn.metrics import mean_squared_error, r2_score
+        # Set the main title (optional)
+        fig.suptitle('Training and Validation Performance')
 
-        # Make predictions on the test set
-        y_pred = model.predict(X_test)
+        plt.tight_layout()  # Adjust spacing between subplots
+        st.pyplot(fig)
 
-        mse = mean_squared_error(y_test, y_pred)
-        r2 = r2_score(y_test, y_pred)
-
-        st.write("Mean Squared Error:", mse)
-        st.write("R2 Score:", r2)
-
-        # update the progress bar
-        for i in range(100):
-            # Update progress bar value
-            progress_bar.progress(i + 1)
-            # Simulate some time-consuming task (e.g., sleep)
-            time.sleep(0.01)
-        # Progress bar reaches 100% after the loop completes
-        st.success("Model training and testing completed!") 
-
-        text = """\n**Loss**
-        The loss can be interpreted as how well the model is performing on a given set of
-        data. Lower loss indicates better performance. In the graph, both the training 
-        loss and validation loss are decreasing over time, which suggests that the 
-        model is learning and improving its performance on both the training data and 
-        the validation data.
-        \n**Mean Squared Error (MSE)**
-        MSE is another way to measure how well a model is performing. It represents the 
-        average squared difference between the predicted values and the actual values. 
-        Lower MSE indicates better performance.  Similar to loss, the MSE  values in 
-        the graph are also decreasing over time, which indicates that the model is
-        getting better at predicting the target variable.
-        \nInterpretation. The fact that both the training loss and validation loss are decreasing
-        and the MSE is decreasing suggests that the ANN regressor is learning the 
-        patterns in the advertising data and is able to make good predictions on 
-        unseen data.
-        \n* The complexity of the model: More complex models can potentially learn more 
-        complex patterns in the data, but they are also more prone to overfitting. 
-        Overfitting is a condition where the model performs well on the training data 
-        but poorly on unseen data.
-        \n* The amount of data: The amount of data can also affect the performance of 
-        an ANN regressor. More data can help the model learn more generalizable patterns.
-        \n* The choice of hyperparameters: Hyperparameters are the settings that control 
-        the learning process of an ANN regressor. Different hyperparameter settings can 
-        lead to different model performance."""
-        with st.expander("Click to display more information about the metrics."):
-            st.write(text)
 
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
