@@ -71,32 +71,7 @@ def app():
         progress_bar = st.progress(0, text="Training the MLP classifier can take some time please wait...")
 
         # Train the model 
-        history = clf.fit(X_train, y_train)
-
-        # Retrieve loss and accuracy history from history object
-        loss_history = clf.loss_curve_
-        accuracy_history = clf.score(X_train, y_train)  # This gives accuracy on the training set
-
-        # Create figure and axes
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
-
-        # Plot loss on the first axis
-        ax1.plot(loss_history, label='Training Loss')
-        ax1.set_title('Training Loss')
-        ax1.set_xlabel('Epoch')
-        ax1.set_ylabel('Loss')
-        ax1.legend()
-
-        # Plot accuracy on the second axis
-        ax2.plot(accuracy_history, label='Training Accuracy')
-        ax2.set_title('Training Accuracy')
-        ax2.set_xlabel('Epoch')
-        ax2.set_ylabel('Accuracy')
-        ax2.legend()
-
-        # Tight layout and show the plot
-        plt.tight_layout()
-        st.pyplot(fig)
+        clf.fit(X_train, y_train)
 
         # update the progress bar
         for i in range(100):
