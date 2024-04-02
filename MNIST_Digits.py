@@ -6,7 +6,8 @@ import time
 # Define the Streamlit app
 def app():
 
-    text = """Three-way comparison of ML Classifiers, MLP and Tensorflow Artificial Neural Networks on the Advertising Dataset"""
+    text = """Three-way comparison of ML Classifiers, MLP and Tensorflow Artificial 
+    Neural Networks on the MNIST Digits Dataset"""
     st.subheader(text)
 
     text = """Prof. Louie F. Cervantes, M. Eng. (Information Engineering) \n
