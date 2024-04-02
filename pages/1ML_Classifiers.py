@@ -124,7 +124,7 @@ def app():
             requires comparing them to all data points in the training set, making 
             it computationally expensive for large datasets like MNIST."""
         st.subheader('Performance of the ' + selected_option)
-        with st.expander("Click to display more informqation.")
+        with st.expander("Click to display more informqation."):
             st.write(text)
 
 #run the app
