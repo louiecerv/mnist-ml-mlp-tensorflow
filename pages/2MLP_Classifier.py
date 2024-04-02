@@ -31,22 +31,22 @@ def app():
     options = ["relu", "tanh", "logistic"]
     activation = st.sidebar.selectbox('Select the activation function:', options)
 
-    options = ["lbfgs", "adam", "sgd"]
+    options = ["adam", "lbfgs" , "sgd"]
     solver = st.sidebar.selectbox('Select the solver:', options)
 
-    hidden_layers = st.sidebar.slider(      
-        label="How many hidden layers? :",
-        min_value=5,
-        max_value=100,
-        value=10,  # Initial value
-        step=5
+    n_neurons = st.sidebar.slider(      
+        label="How many neurons? :",
+        min_value=250,
+        max_value=1000,
+        value=500,  # Initial value
+        step=10
     )
 
     alpha = st.sidebar.slider(   
         label="Set the alpha:",
-        min_value=.001,
-        max_value=1.0,
-        value=0.1,  # In1.0itial value
+        min_value=.01,
+        max_value=0.1,
+        value=0.01,  # In1.0itial value
     )
 
     max_iter = st.sidebar.slider(   
@@ -57,10 +57,13 @@ def app():
         step=10
     )
     
-    # Create MLPRegressor model
-    clf = MLPClassifier(solver=solver, activation=activation, 
-        alpha=0.01, hidden_layer_sizes=(hidden_layers, 10), 
-        random_state=1,max_iter=max_iter)
+    classifier = MLPClassifier(
+    solver=solver,  # Optimization algorithm
+    alpha=0.001,  # Learning rate
+    hidden_layer_sizes=(n_neurons,),  # One hidden layer with 512 neurons
+    random_state=42,  # Set random seed for reproducibility
+    max_iter=max_iter,  # Maximum number of training iterations  
+    )
 
     text = """Recommended ANN parameters: solver=lbfgs, activation=relu, n_hidden_layer=10, max_iter=500"""
     st.write(text)
