@@ -7,7 +7,7 @@ import seaborn as sns
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.datasets import fetch_openml
+from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
@@ -17,13 +17,12 @@ import time
 # Define the Streamlit app
 def app():
     progress_bar = st.progress(0, text="Loading the MNIST Digits Dataset, please wait...")
+    # Load the MNIST Digits dataset
+    digits = load_digits()
 
-    # Load MNIST dataset
-    X, y = fetch_openml('mnist_784', version=1, data_home=".", return_X_y=True)
-
-    # Split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(digits.data, digits.target, test_size=0.2, random_state=42)
+ 
     st.subheader('The task: Classify handwritten digits from 0 to 9 based on a given image.')
     text = """Dataset: MNIST - 70,000 images of handwritten digits (28x28 pixels), each labeled 
     with its corresponding digit (0-9).

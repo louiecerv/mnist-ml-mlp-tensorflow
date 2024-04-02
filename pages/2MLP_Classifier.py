@@ -5,7 +5,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.neural_network import MLPClassifier
-from sklearn.datasets import fetch_openml
+from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
@@ -20,12 +20,11 @@ def app():
     good, typically achieving accuracy rates in the high 90s (often above 95%). """
     st.write(text)
     
-    # Load MNIST dataset
-    X, y = fetch_openml('mnist_784', version=1, data_home=".", return_X_y=True)
+    # Load the MNIST Digits dataset
+    digits = load_digits()
 
-    # Split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(digits.data, digits.target, test_size=0.2, random_state=42)
    # Define MLP parameters    
     st.sidebar.subheader('Set the MLP Parameters')
     options = ["relu", "tanh", "logistic"]
