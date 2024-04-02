@@ -19,7 +19,7 @@ def app():
     progress_bar = st.progress(0, text="Loading the MNIST Digits Dataset, please wait...")
 
     # Load MNIST dataset
-    mnist = fetch_openml('mnist_784', version=1, data_home=".", return_X_y=True)
+    X, y = fetch_openml('mnist_784', version=1, data_home=".", return_X_y=True)
 
     # Split data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
