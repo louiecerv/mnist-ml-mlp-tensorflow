@@ -5,10 +5,13 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn import tree
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.svm import SVR
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+
 import time
 
 # Define the Streamlit app
@@ -46,7 +49,6 @@ def app():
     label from all predictions is assigned."""
     st.write(text)
 
-
     st.subheader('First 25 images in the MNIST dataset') 
 
     # Get the first 25 images and reshape them to 28x28 pixels
@@ -68,7 +70,6 @@ def app():
     st.sidebar.subheader('Select the classifier')
 
     # Create the selecton of classifier
-
     clf = tree.DecisionTreeClassifier()    
     options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier', 'K Nearest Neighbor']
     selected_option = st.sidebar.selectbox('Select the classifier', options)
