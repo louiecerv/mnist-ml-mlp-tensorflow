@@ -75,8 +75,8 @@ def app():
         history = clf.fit(X_train, y_train)
 
         # Retrieve loss and accuracy history from history object
-        loss_history = history.loss_curve_
-        accuracy_history = history.score_curve_
+        loss_history = clf.loss_curve_
+        accuracy_history = clf.score(X_train, y_train)  # This gives accuracy on the training set
 
         # Create figure and axes
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
