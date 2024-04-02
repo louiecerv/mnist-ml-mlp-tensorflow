@@ -95,10 +95,9 @@ def app():
 
     epochs = st.sidebar.slider(   
         label="Set the number epochs:",
-        min_value=50,
-        max_value=150,
-        value=100,
-        step=10
+        min_value=5,
+        max_value=50,
+        value=10,
     )
 
     model = tf.keras.models.Sequential([
@@ -160,8 +159,9 @@ def app():
 
         history = model.fit(
             ds_train,
-            epochs=20,
+            epochs=epochs,
             validation_data=ds_test,
+            callbacks=[CustomCallback()]
         )
 
         # Evaluate the model on the test data
