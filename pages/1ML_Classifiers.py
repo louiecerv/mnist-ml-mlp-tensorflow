@@ -74,7 +74,7 @@ def app():
     options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier', 'K Nearest Neighbor']
     selected_option = st.sidebar.selectbox('Select the classifier', options)
     if selected_option =='Decision Tree':
-`       clf = tree.DecisionTreeClassifier()
+        clf = tree.DecisionTreeClassifier()
     elif selected_option =='Random Forest Classifier':
         clf = RandomForestClassifier(n_jobs=2, random_state=0)
     elif selected_option=='Extreme Random Forest Classifier':
