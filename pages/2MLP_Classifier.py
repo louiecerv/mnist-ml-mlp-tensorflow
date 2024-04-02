@@ -59,7 +59,7 @@ def app():
     
     classifier = MLPClassifier(
     solver=solver,  # Optimization algorithm
-    alpha=0.001,  # Learning rate
+    alpha=alpha,  # Learning rate
     hidden_layer_sizes=(n_neurons,),  # One hidden layer with 512 neurons
     random_state=42,  # Set random seed for reproducibility
     max_iter=max_iter,  # Maximum number of training iterations  
