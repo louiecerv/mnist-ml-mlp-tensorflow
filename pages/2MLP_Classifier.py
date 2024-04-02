@@ -53,7 +53,7 @@ def app():
         label="Set the max iterations:",
         min_value=100,
         max_value=1000,
-        value=500,  
+        value=100,  
         step=10
     )
     
