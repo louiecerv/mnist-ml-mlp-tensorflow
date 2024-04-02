@@ -16,7 +16,8 @@ import time
 
 # Define the Streamlit app
 def app():
-        
+    progress_bar = st.progress(0, text="Loading the MNIST Digits Dataset, please wait...")
+
     # Load MNIST dataset
     mnist = fetch_openml('mnist_784', version=1, data_home=".", return_X_y=True)
 
@@ -66,6 +67,15 @@ def app():
     # Show the plot
     plt.tight_layout()
     st.pyplot(fig)
+
+    # update the progress bar
+    for i in range(100):
+        # Update progress bar value
+        progress_bar.progress(i + 1)
+        # Simulate some time-consuming task (e.g., sleep)
+        time.sleep(0.01)
+    # Progress bar reaches 100% after the loop completes
+    st.success("Regressor training completed!")     
 
     st.sidebar.subheader('Select the classifier')
 
