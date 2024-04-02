@@ -10,29 +10,25 @@ import time
 
 # Define the Streamlit app
 def app():
-    if "dataset_ready" not in st.session_state:
-        st.error("Dataset must be loaded. Click Heart Disease in the sidebar.")
-    st.subheader('Neural Network Regressor Performance on the Advertising Dataset')
-    text = """The advertising dataset is commonly used for a multiple linear regression task.
-    Here, the goal is to predict sales figures based on the amount spent on advertising 
-    through different channels like TV, radio, and newspaper. The model learns the 
-    relationship between these advertising expenses (independent variables) and the 
-    resulting sales (dependent variable).
-    \n**MLP Regressor**
-    \nWhile linear regression is a good starting point, a more complex model  can be 
-    used - a Multi-Layer Perceptron (MLP) regressor. This is a type of artificial 
-    neural network that can capture non-linear relationships between the 
-    advertising expenses and sales.
-    \nThe model takes the advertising expenses (TV, radio, newspaper) as inputs.
-    These inputs are passed through multiple hidden layers with interconnected nodes. 
-    Each layer performs a linear transformation followed by a non-linear activation 
-    function. These functions allow the model to learn complex patterns.
-    Finally, the output layer produces a single value representing the predicted 
-    sales figure. Compared to linear regression, MLP regressor can model more 
-    intricate relationships between advertising and sales, potentially leading to 
-    more accurate predictions."""
+    st.subheader('Neural Network Classifier Performance on the MNIST Digits Dataset')
+    text = """Dataset: MNIST - 70,000 images of handwritten digits (28x28 pixels), each labeled 
+    with its corresponding digit (0-9).
+    \nThe performance of an MLP classifier on the MNIST handwritten digits dataset can be quite 
+    good, typically achieving accuracy rates in the high 90s (often above 95%). """
     st.write(text)
     
+    # Load MNIST dataset
+    mnist = fetch_openml('mnist_784', version=1, data_home=".", return_X_y=True)
+
+    # Extract only the specified number of images and labels
+    size = 10000
+    X, y = mnist
+    X = X[:size]
+    y = y[:size]
+
+    # Split data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
    # Define MLP parameters    
     st.sidebar.subheader('Set the MLP Parameters')
     options = ["relu", "tanh", "logistic"]
@@ -63,11 +59,6 @@ def app():
         value=300,  
         step=10
     )
-
-    X_train = st.session_state.X_train
-    y_train = st.session_state.y_train
-    X_test = st.session_state.X_test
-    y_test = st.session_state.y_test
     
     # Create MLPRegressor model
     clf = MLPRegressor(solver=solver, activation=activation, 
@@ -99,53 +90,13 @@ def app():
 
         # Make predictions on the test set
         y_pred = clf.predict(X_test)
-        
-        # update the progress bar
-        for i in range(100):
-            # Update progress bar value
-            progress_bar.progress(i + 1)
-            # Simulate some time-consuming task (e.g., sleep)
-            time.sleep(0.01)
-        # Progress bar reaches 100% after the loop completes
-        st.success("Performance test completed!") 
-        
-        # Calculate performance metrics
-        mse = mean_squared_error(y_test, y_pred)
-        r2 = r2_score(y_test, y_pred)
 
-        # Print performance metrics
+        st.subheader('Confusion Matrix')
+        st.write('Confusion Matrix')
+        cm = confusion_matrix(y_test, y_pred)
+        st.write(cm)
         st.subheader('Performance Metrics')
-        st.write("Mean Squared Error: {:.4f}".format(mse))  
-        st.write("R2 score: {:.4f}".format(r2))
-
-        text = """Mean Squared Error (MSE) and R-squared (R²) are two commonly used metrics 
-        to evaluate the performance of an Artificial Neural Network (ANN) regressor, 
-        which predicts continuous values.
-        \nMean Squared Error (MSE):
-        \nMeasures the average squared difference between the actual values and the 
-        predicted values by your ANN regressor.
-        \nA lower MSE indicates a better fit, meaning the predictions are on average 
-        closer to the actual values.
-        \nMSE is sensitive to outliers, as large errors get squared and contribute more 
-        significantly to the overall error.
-        \nSince MSE is in squared units of the target variable, it can be difficult to 
-        interpret directly.
-        \nR-squared (R²):
-        Represents the proportion of variance in the dependent variable (what you're trying 
-        to predict) that's explained by your ANN regressor. R² ranges from 0 to 1, where 0 
-        indicates no explanatory power and 1 indicates a perfect fit.
-        R² is easier to interpret than MSE as it's on a 0-1 scale. However, it doesn't 
-        tell you the magnitude of the errors.
-        It's important to consider the number of features (independent variables) in your model. 
-        R² can increase simply by adding more features, even if they're not relevant. 
-        For this reason, a variation called Adjusted R² is often used as a penalty for 
-        model complexity.
-        \nTogether:
-        MSE provides an absolute measure of the prediction error, while R² gives you a 
-        relative idea of how well your model explains the variance.
-        Ideally, you want a low MSE and a high R², but there can be trade-offs. 
-        A more complex model might achieve a lower MSE but a higher R² due to overfitting."""
-        st.write(text)
+        st.write(classification_report(y_test, y_pred))  
 
 #run the app
 if __name__ == "__main__":
