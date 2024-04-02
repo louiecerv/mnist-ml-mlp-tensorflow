@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.neural_network import MLPRegressor
+from sklearn.neural_network import MLPClassifier
 from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
@@ -64,7 +64,7 @@ def app():
     )
     
     # Create MLPRegressor model
-    clf = MLPRegressor(solver=solver, activation=activation, 
+    clf = MLPClassifier(solver=solver, activation=activation, 
         alpha=0.01, hidden_layer_sizes=(hidden_layers, 10), 
         random_state=1,max_iter=max_iter)
 
@@ -72,7 +72,7 @@ def app():
     st.write(text)
 
     if st.button('Start Training'):
-        progress_bar = st.progress(0, text="Training the MLP regressor can take some time please wait...")
+        progress_bar = st.progress(0, text="Training the MLP classifier can take some time please wait...")
 
         # Train the model 
         clf.fit(X_train, y_train)
@@ -84,11 +84,11 @@ def app():
             # Simulate some time-consuming task (e.g., sleep)
             time.sleep(0.01)
         # Progress bar reaches 100% after the loop completes
-        st.success("Regressor training completed!") 
+        st.success("Classifier training completed!") 
 
-        st.subheader('Performance of the MLP-ANN Regressor on the Advertising Dataset')
-        text = """We test the performance of the MLP Regressor using the 20% of the dataset that was
-        set aside for testing. The regressor performance metrics are presented below."""
+        st.subheader('Performance of the MLP-ANN Classfier on the MNIST Digits Dataset')
+        text = """We test the performance of the MLP Classifier using the 20% of the dataset that was
+        set aside for testing. The classifier performance metrics are presented below."""
         st.write(text)
 
         # Make predictions on the test set
