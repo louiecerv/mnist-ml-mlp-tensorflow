@@ -75,7 +75,7 @@ def app():
         # Simulate some time-consuming task (e.g., sleep)
         time.sleep(0.01)
     # Progress bar reaches 100% after the loop completes
-    st.success("Regressor training completed!")     
+    st.success("Dataset loading completed!")     
 
     st.sidebar.subheader('Select the classifier')
 
