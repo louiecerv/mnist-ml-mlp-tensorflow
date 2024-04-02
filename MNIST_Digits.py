@@ -22,7 +22,7 @@ def app():
     testing various image processing systems. The acronym stands for Modified National Institute 
     of Standards and Technology. MNIST is a popular dataset in the field of machine learning and 
     can provide a baseline for benchmarking algorithms."""
-    form1.write(text)
+    st.write(text)
     
 #run the app
 if __name__ == "__main__":
