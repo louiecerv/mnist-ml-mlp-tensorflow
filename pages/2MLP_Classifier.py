@@ -57,7 +57,7 @@ def app():
         step=10
     )
     
-    classifier = MLPClassifier(
+    clf = MLPClassifier(
     solver=solver,  # Optimization algorithm
     alpha=alpha,  # Learning rate
     hidden_layer_sizes=(n_neurons,),  # One hidden layer with 512 neurons
