@@ -76,7 +76,7 @@ def app():
 
    # Define ANN parameters    
     st.sidebar.subheader('Set the Neural Network Parameters')
-    options = ["relu", "tanh", "elu", "selu"]
+    options = ["relu", "leaky_relu",  "tanh", "elu", "selu"]
     h_activation = st.sidebar.selectbox('Activation function for the hidden layer:', options)
 
     options = ["sigmoid", "softmax"]
