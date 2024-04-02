@@ -25,32 +25,18 @@ def normalize_img(image, label):
 def app():
 
     st.subheader('Tensorflow ANN on the MNIST Digit Dataset')
-    text = """The advertising dataset is a classic example used for 
-    supervised regression tasks. It typically contains information on 
-    advertising spend across various channels (TV, Radio, Newspaper) and the 
-    resulting sales figures. The goal of the regression task is to build a 
-    model that can predict sales based on the advertising budget allocated 
-    to each channel.
-    \n* **Target Variable:** Sales (numerical)
-    \n* **Features:** Advertising budget for TV, Radio, Newspaper (numerical)
-    \n* **Model Objective:** Predict sales as accurately as possible given the 
-    advertising budget. 
-    \n1. **Data Loading:** The app loads the advertising dataset using libraries 
-    like Pandas.
-    \n2. **Preprocessing:** The data might require preprocessing steps like handling
-    missing values, scaling features, and splitting the data into training and 
-    testing sets.
-    \n3. **TensorFlow ANN Model:** 
-    * Define a TensorFlow ANN model with an appropriate architecture (e.g., 
-    input layer, hidden layers with activation functions, output layer).
-    * Compile the model with a loss function (e.g., Mean Squared Error) and an optimizer 
-    (e.g., Adam).
-    * Train the model on the training data.
-    \n4. **Evaluation:** 
-    * Evaluate the trained TensorFlow ANN model on the testing data using metrics like Mean Squared Error (MSE) or R-squared.
-    \n5. **Comparison Models:** 
-    * Train separate Machine Learning linear regressors and MLP regressors from scikit-learn on the same data.
-    * Evaluate their performance on the testing data using the same metrics."""
+    text = """The performance of a TensorFlow Artificial Neural Network (ANN) on the 
+    MNIST digits dataset depends on various factors including the architecture of 
+    the neural network, the optimization algorithm used, the preprocessing of the
+    data, and the hyperparameters chosen. However, typically ANNs perform quite well 
+    on the MNIST dataset due to its relatively simple nature.
+    \n1. **Accuracy**: With a well-designed neural network architecture and appropriate hyperparameters, it's common to achieve accuracy rates of over 95% on the MNIST dataset. In many cases, accuracies exceeding 98% are achievable, particularly with convolutional neural networks (CNNs) which are commonly used for image classification tasks like MNIST.
+    \n2. **Training Time**: The training time of the ANN on the MNIST dataset depends on the complexity of the network architecture, the size of the dataset, and the computational resources available. Training ANNs on MNIST is generally quite fast, especially when using GPU acceleration.
+    \n3. **Overfitting**: Since MNIST is a relatively small and simple dataset, overfitting can be a concern, especially with complex neural network architectures. Regularization techniques such as dropout and L2 regularization are commonly used to mitigate overfitting.
+    \n4. **Hyperparameter Tuning**: Achieving optimal performance often requires tuning hyperparameters such as learning rate, batch size, number of hidden layers, number of neurons per layer, activation functions, etc. Techniques like grid search or random search are commonly employed to find the best combination of hyperparameters.
+    \n5. **Visualization of Results**: It's common to visualize the performance of the ANN using confusion matrices, precision-recall curves, or ROC curves to gain insights into how well the model is performing for each class.
+    \n6. **Generalization**: A well-trained ANN on the MNIST dataset should generalize well to unseen data, meaning it performs well on new, unseen digits beyond the training set.
+    \nTensorFlow ANN's performance on the MNIST dataset is often quite impressive, especially given its simplicity, and it serves as a good starting point for learning and experimenting with neural networks and image classification tasks."""
     st.write(text)
 
     (ds_train, ds_test), ds_info = tfds.load(
