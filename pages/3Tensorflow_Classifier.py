@@ -183,6 +183,14 @@ def app():
         plt.tight_layout()  # Adjust spacing between subplots
         st.pyplot(fig)
 
+        # update the progress bar
+        for i in range(100):
+            # Update progress bar value
+            progress_bar.progress(i + 1)
+            # Simulate some time-consuming task (e.g., sleep)
+            time.sleep(0.01)
+        # Progress bar reaches 100% after the loop completes
+        st.success("Classifier training completed!") 
 
 # Define a custom callback function to update the Streamlit interface
 class CustomCallback(tf.keras.callbacks.Callback):
